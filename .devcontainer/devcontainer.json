@@ -1,5 +1,5 @@
 {
-	"name": "🤖 Sarah Connor?",
+	"name": "🏰 Chronicles of Aethelgard 🧙🏻‍♂️",
 
 	"dockerComposeFile": "compose.yml",
 	"service": "ai-workspace",
@@ -23,17 +23,25 @@
 	},
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {
-		  "version": "latest"
-		}
+		  	"version": "latest"
+		},
+		//"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+
 	},
 	"mounts": [
 		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
 		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/${localEnv:USER}/.ssh,type=bind,consistency=cached",
-		//"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+		"source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
 	],
+	"runArgs": [
+		//"--network=host"
+		//"-v", "/var/run/docker.sock:/var/run/docker.sock"
+		//"--init", "--privileged"
+	],
+	//"overrideCommand": false,
 	// Run commands after the container is created.
 	//"postCreateCommand": "./.devcontainer/postCreateCommand.sh",
-	"postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+	"postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder} && sudo chmod 666 /var/run/docker.sock",
 	"remoteUser": "${localEnv:USER}"
 
 }

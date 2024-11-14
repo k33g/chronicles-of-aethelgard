@@ -1,6 +1,6 @@
 {
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Idea intellij light theme",
+    "workbench.colorTheme": "Intellij Classic",
     "editor.fontSize": 14,
     "terminal.integrated.fontSize": 18,
     "editor.insertSpaces": true,

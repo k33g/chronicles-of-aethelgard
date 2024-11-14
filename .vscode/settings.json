@@ -1,8 +1,8 @@
 {
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Idea intellij light theme",
-    "editor.fontSize": 14,
-    "terminal.integrated.fontSize": 18,
+    "workbench.colorTheme": "Intellij Classic",
+    "editor.fontSize": 12,
+    "terminal.integrated.fontSize": 12,
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
     "editor.detectIndentation": true,
@@ -14,7 +14,7 @@
         "diffEditor.ignoreTrimWhitespace": false,
         "editor.fontWeight": "normal",
         "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace",
-        "editor.fontSize": 16,
+        "editor.fontSize": 14,
         "editor.wordWrap": "on",
         "editor.quickSuggestions": {
             "comments": "off",
@@ -22,9 +22,9 @@
             "other": "off"
         }
     },
-    "markdown.preview.fontSize": 18,
+    "markdown.preview.fontSize": 14,
     "workbench.editorAssociations": {
-        "*.md": "vscode.markdown.preview.editor"
+        //"*.md": "vscode.markdown.preview.editor"
     },
     "[dockerfile]": {
         "editor.fontSize": 14,
@@ -45,20 +45,7 @@
 
     },
     "[go]": {
-        "editor.fontSize": 18,
-    },
-    "[plaintext]": {
-        "editor.fontSize": 18,
-
-    },
-    "[jsonc]": {
-        "editor.fontSize": 18,
-    },
-    "[jsonl]": {
-        "editor.fontSize": 18,
-    },
-    "[javascript]": {
-        "editor.fontSize": 18,
+        "editor.fontSize": 14,
     },
     "python.defaultInterpreterPath": "~/.venv/bin/python"
 }

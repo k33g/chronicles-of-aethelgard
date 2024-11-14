@@ -14,7 +14,8 @@ services:
         #- USER_NAME=sarah_connor
         - USER_NAME=${USER}
     volumes:
-      - ../..:/workspaces:cached      
+      - ../..:/workspaces:cached   
+      #- /var/run/docker.sock.raw:/var/run/docker.sock   
     command: sleep infinity
     #environment:
     #  - USER_NAME=sarah_connor

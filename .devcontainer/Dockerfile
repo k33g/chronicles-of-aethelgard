@@ -24,7 +24,7 @@ ENV LC_CTYPE=en_US.UTF-8
 # ------------------------------------
 RUN <<EOF
 apt-get update 
-apt-get install -y curl wget git build-essential xz-utils bat exa software-properties-common sudo sshpass
+apt-get install -y curl wget git build-essential xz-utils bat exa software-properties-common sudo sshpass jq
 apt-get install -y python3 python3-pip python3-venv sudo
 
 ln -s /usr/bin/batcat /usr/bin/bat

@@ -1,4 +1,4 @@
-FROM ollama/ollama:0.3.14
+FROM ollama/ollama:0.4.1
 
 RUN <<EOF
 /bin/sh -c "\
@@ -6,11 +6,7 @@ RUN <<EOF
     sleep 1 && \
     ollama pull qwen2.5:0.5b && \
     ollama pull qwen2.5:1.5b && \
-    ollama pull qwen2.5-coder:1.5b && \
-    ollama pull granite3-moe:1b	&& \
-    ollama pull smollm2:360m && \
-    ollama pull mxbai-embed-large:latest \
-
+    ollama pull mxbai-embed-large:latest
 "
 EOF
 
