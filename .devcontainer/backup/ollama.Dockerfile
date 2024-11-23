@@ -1,4 +1,4 @@
-FROM ollama/ollama:0.4.3
+FROM ollama/ollama:0.4.1
 
 RUN <<EOF
 /bin/sh -c "\
