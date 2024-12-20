@@ -1,19 +1,18 @@
-go 1.23.1
+go 1.23.4
 
 use (
-	01-birth
-	02-personality
-	03-memory
-	04-more-data
-	05-more-data-rag
-	06-one-more-thing
-
-	game
-	
-	rpg-game
-	tmp
+	01-generate-room-description
+	02-generate-names
+	03-generate-names
+	04-generate-npc-descriptions
+	05-room-services
 
 	bot
 	bot-cli
+
+	game
+
+	rpg-game
+	tmp
 
 )
