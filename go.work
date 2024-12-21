@@ -6,8 +6,9 @@ use (
 	03-generate-names
 	04-generate-npc-descriptions
 	05-room-services
+	06-bot-npc
+	07-bot-with-memory
 
-	bot
 	bot-cli
 
 	game

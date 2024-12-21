@@ -1,11 +1,13 @@
 # Initialisation
 
-## Volume partagé
+## Volume partagé et réseau partagé
 
 ```bash
 docker volume create ollama_shared_data
+docker network create ollama-network
 ```
-Ce volume sera utilisé par tous les autres projets Docker Compose
+
+Ce volume et ce network seront utilisés par tous les autres projets Docker Compose
 
 ## Téléchargement des modèles
 

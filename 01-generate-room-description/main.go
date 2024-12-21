@@ -7,17 +7,12 @@ import (
 	"os"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/ollama/ollama/api"
 )
 
 func main() {
 
 	ctx := context.Background()
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		log.Fatal("😡:", errEnv)
-	}
 
 	ollamaUrl := os.Getenv("OLLAMA_HOST")
 	model := os.Getenv("LLM")
@@ -47,10 +42,10 @@ func main() {
 
 	userContent := "Generate a room description for the name 'The Dark Cave' with the above instructions."
 	/*
-	The Grand Entrance
-	The Hall of Whispers
-	The Chamber of Echoes
-	The Forgotten Library
+		The Grand Entrance
+		The Hall of Whispers
+		The Chamber of Echoes
+		The Forgotten Library
 	*/
 
 	// Prompt construction

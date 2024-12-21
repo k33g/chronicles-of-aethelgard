@@ -9,7 +9,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/ollama/ollama/api"
 )
 
@@ -38,10 +37,6 @@ func GetCharacter() (Character, error) {
 func main() {
 
 	ctx := context.Background()
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		log.Fatal("😡:", errEnv)
-	}
 
 	ollamaUrl := os.Getenv("OLLAMA_HOST")
 	model := os.Getenv("LLM")

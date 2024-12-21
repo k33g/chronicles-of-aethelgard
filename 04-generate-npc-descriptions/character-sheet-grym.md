@@ -1,41 +1,27 @@
 # CHARACTER SHEET
 
-### Title: The Dwarf Grym
+```markdown
+# Name: Grym
 
-#### Name and Title:
-- **Name**: Grym
-- **Title**: The Dwarf of the Frost
+## Kind: Dwarf
 
-#### Age:
-- **Age**: 50
+### Age: 16
 
-#### Family:
-- **Parents**: Elrond and Elara
-- **Children**: A daughter named Lyra
+### Family: Grym is the son of a noble family, the Grym family. His parents are both skilled warriors and leaders in their community. Grym grew up in a world of adventure and bravery, where he learned to be a skilled archer and a skilled fighter. He has a deep sense of honor and loyalty, and he is always ready to defend his home and his people.
 
-#### Occupation:
-- **Occupation**: A skilled blacksmith and armor maker in the Frosthold Kingdom.
-- **Skills**: Proficient in forging, welding, and crafting intricate armor and weapons. He is also a respected member of the Frosthold Guild of Blacksmiths.
+### Occupation: Grym is a skilled archer and a skilled fighter. He has a natural talent for combat and has been trained by his parents to be a master of the battlefield. He is known for his strength, agility, and his ability to outmaneuver his opponents. Grym is also a skilled hunter and a skilled tracker, which he uses to find his prey and to protect his home.
 
-#### Physical Appearance:
-- **Height**: 6 feet 2 inches
-- **Build**: Stocky and muscular, with a thick beard and a prominent nose.
-- **Distinguishing Features**: Grym is known for his thick, curly hair that often sticks to his armor. He wears a simple but sturdy set of black armor, which is often adorned with frost patterns and runes.
+### Physical Appearance: Grym is a tall, muscular dwarf with a broad chest and strong muscles. He has short, dark hair and piercing blue eyes that seem to glow in the light. Grym is a master of his weapons and a skilled archer, and he has a reputation as a fierce warrior.
 
-#### Clothing:
-- **Armor**: A set of black leather armor with frost-patterned and rune-studded plates.
-- **Clothing**: A woolen tunic and trousers, both of which are lined with leather and adorned with frost patterns. He often wears a leather belt with a small pouch for tools and a small hammer.
+### Clothing: Grym wears a simple, black leather armor that is designed to protect him from the elements. He also wears a pair of dark, leather boots that are designed to withstand the harsh conditions of the forest. Grym's clothing is simple and practical, and he is always ready for action.
 
-#### Food Preferences:
-- **Food**: Grym prefers hearty, frost-infused meals. He often enjoys a hearty stew made with meat, herbs, and a touch of frost-infused water.
+### Food Preferences: Grym is a skilled hunter and a skilled tracker, and he is always on the lookout for his next meal. He prefers to eat meat and prefers to hunt animals that are large and strong, such as wolves and bears. Grym is also a skilled tracker and a skilled hunter, and he is always on the lookout for his next meal.
 
-#### Background Story:
-- **Personal Story**: Grym was born into the Frosthold Kingdom, where frost and cold were the norm. He grew up in the Frosthold Kingdom, learning the skills of a blacksmith from his father, Elrond. He was known for his precision and attention to detail, which made him a valuable member of the Frosthold Guild of Blacksmiths. Over the years, he has become respected for his craftsmanship and his ability to create armor that is both functional and aesthetically pleasing.
+### Background Story: Grym was born into a noble family, and he grew up in a world of adventure and bravery. His parents were skilled warriors and leaders in their community, and they raised him to be a skilled archer and a skilled fighter. Grym was always ready to defend his home and his people, and he was always a loyal and reliable companion.
 
-#### Personality and Character Traits:
-- **Strengths**: Grym is known for his precision, his ability to create intricate and durable armor, and his skill in welding and forging. He is also fiercely loyal to his guild and his family.
-- **Weaknesses**: Grym can be stubborn and sometimes overprotective of his work, which can lead to conflicts with others.
-- **Distinctive Traits**: Grym is a master of frost and cold, and he often uses his knowledge of frost to enhance his weapons and armor. He is also a skilled negotiator, often using his knowledge of frost to settle disputes and forge alliances.
+### Personality and Character Traits: Grym is a skilled archer and a skilled fighter, and he is always ready to defend his home and his people. He is a skilled hunter and a skilled tracker, and he is always on the lookout for his next meal. Grym is a skilled warrior and a skilled tracker, and he is always on the lookout for his next meal. Grym is a skilled archer and a skilled fighter, and he is always ready to defend his home and his people.
 
-#### Quote:
-- "The only thing stronger than frost is the will of a skilled blacksmith."
+### Quote: "I am Grym, a dwarf from the forest. I am a skilled archer and a skilled fighter, and I am always ready to defend my home and my people."
+
+## Purpose: Grym is a dwarf with a strong sense of honor and loyalty, and he is always ready to defend his home and his people. He is a skilled archer and a skilled fighter, and he is always ready to defend his home and his people. He is a skilled hunter and a skilled tracker, and he is always on the lookout for his next meal. He is a skilled warrior and a skilled tracker, and he is always on the lookout for his next meal. He is a skilled archer and a skilled fighter, and he is always ready to defend his home and his people.
+```

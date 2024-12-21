@@ -8,17 +8,12 @@ import (
 	"os"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/ollama/ollama/api"
 )
 
 func main() {
 
 	ctx := context.Background()
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		log.Fatal("😡:", errEnv)
-	}
 
 	ollamaUrl := os.Getenv("OLLAMA_HOST")
 	model := os.Getenv("LLM")
@@ -47,7 +42,7 @@ func main() {
 				"type": "string",
 			},
 		},
-		"required": []string{"name", "kind",},
+		"required": []string{"name", "kind"},
 	}
 
 	jsonModel, err := json.Marshal(schema)
@@ -55,23 +50,22 @@ func main() {
 		log.Fatalln("😡", err)
 	}
 
-
 	/*
-	generationInstructions := `Generate a random name for a role-playing game character for a given kind (species/race). The output should be in JSON format, with the keys 'name' and 'kind'. Ensure the name is fantasy-themed.
-		**Expected Output:** 
-		Generate a JSON object with the keys 'name' and 'kind'. For example:
-		{
-		"name": "Eldorin Shadowleaf",
-		"kind": "Elf"
-		}
-	`
+		generationInstructions := `Generate a random name for a role-playing game character for a given kind (species/race). The output should be in JSON format, with the keys 'name' and 'kind'. Ensure the name is fantasy-themed.
+			**Expected Output:**
+			Generate a JSON object with the keys 'name' and 'kind'. For example:
+			{
+			"name": "Eldorin Shadowleaf",
+			"kind": "Elf"
+			}
+		`
 	*/
 	generationInstructions := `Generate a random name for a role-playing game character for a given kind (species/race). The output should be in JSON format, with the keys 'name' and 'kind'. Ensure the name is fantasy-themed.
 	`
 
-	userContent := "Give a name for a Dwarf."
+	//userContent := "Give a name for a Dwarf."
 	//userContent := "Give a name for an Elf."
-	//userContent := "Give a name for a Human."
+	userContent := "Give a name for a Human."
 
 	// Prompt construction
 	messages := []api.Message{
@@ -81,7 +75,7 @@ func main() {
 	}
 
 	//stream := true
-	noStream  := false
+	noStream := false
 
 	req := &api.ChatRequest{
 		Model:    model,

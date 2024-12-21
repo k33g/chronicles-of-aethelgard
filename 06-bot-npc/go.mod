@@ -1,4 +1,4 @@
-module 01-generate-room-description
+module 06-bot-npc
 
 go 1.23.4
 

@@ -8,17 +8,16 @@ import (
 	"os"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/ollama/ollama/api"
 )
 
 func main() {
 
 	ctx := context.Background()
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		log.Fatal("😡:", errEnv)
-	}
+	//errEnv := godotenv.Load()
+	//if errEnv != nil {
+	//	log.Fatal("😡:", errEnv)
+	//}
 
 	ollamaUrl := os.Getenv("OLLAMA_HOST")
 	model := os.Getenv("LLM")

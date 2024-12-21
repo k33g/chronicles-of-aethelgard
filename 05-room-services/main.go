@@ -9,7 +9,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/joho/godotenv"
 	"github.com/ollama/ollama/api"
 )
 
@@ -26,11 +25,6 @@ func GetBytesBody(request *http.Request) []byte {
 
 func main() {
 	ctx := context.Background()
-
-	errEnv := godotenv.Load()
-	if errEnv != nil {
-		log.Fatal("😡:", errEnv)
-	}
 
 	var httpPort = os.Getenv("HTTP_PORT")
 	if httpPort == "" {

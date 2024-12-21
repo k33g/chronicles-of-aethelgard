@@ -1,5 +1,5 @@
 #!/bin/bash 
-SERVICE_URL="http://localhost:5051"
+SERVICE_URL="http://localhost:5050"
 read -r -d '' DATA <<- EOM
 {
   "room_name":"Tempest's Shadow Haven"

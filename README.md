@@ -61,3 +61,11 @@ La logique utilisée est la même que pour les autres langages.
 ## Bébés LLMs
 
 Pas forcément très précis, mais ils sont très pratiques pour travailler sur des petites architectures et on peut tout de même les éduquer un peu.
+
+
+## Principes et objectifs du workshop
+
+- Comprendre comment fonctionne les applications d'IA générative
+- Travailler sur les prompts
+- On ne codera quasiment pas
+- On va créer tous les éléments / outils pour aider à jouer à un jeu de rôle

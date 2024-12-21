@@ -6,6 +6,8 @@ services:
       - ollama-data:/root/.ollama
     ports:
       - 11434:11434
+    networks:
+      - ollama-network
 
   download-llm-1:
     image: curlimages/curl:8.6.0
@@ -13,6 +15,8 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
+    networks:
+      - ollama-network
 
   download-llm-2:
     image: curlimages/curl:8.6.0
@@ -20,6 +24,8 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
+    networks:
+      - ollama-network
 
   download-llm-3:
     image: curlimages/curl:8.6.0
@@ -27,6 +33,8 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
+    networks:
+      - ollama-network
 
   download-llm-4:
     image: curlimages/curl:8.6.0
@@ -34,20 +42,26 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
+    networks:
+      - ollama-network
 
-  download-llm-5:
-    image: curlimages/curl:8.6.0
-    entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"mxbai-embed-large:latest\"}"]
-    depends_on:
-      ollama-service:
-        condition: service_started
+  #download-llm-5:
+  #  image: curlimages/curl:8.6.0
+  #  entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"mxbai-embed-large:latest\"}"]
+  #  depends_on:
+  #    ollama-service:
+  #      condition: service_started
+  #  networks:
+  #    - ollama-network
 
-  download-llm-6:
-    image: curlimages/curl:8.6.0
-    entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"snowflake-arctic-embed:33m\"}"]
-    depends_on:
-      ollama-service:
-        condition: service_started
+  #download-llm-6:
+  #  image: curlimages/curl:8.6.0
+  #  entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"snowflake-arctic-embed:33m\"}"]
+  #  depends_on:
+  #    ollama-service:
+  #      condition: service_started
+  #  networks:
+  #    - ollama-network
 
   golang-version:
     image: golang:1.23.4-alpine
@@ -61,3 +75,7 @@ volumes:
   ollama-data:
     external: true
     name: ollama_shared_data
+
+networks:
+  ollama-network:
+    external: true

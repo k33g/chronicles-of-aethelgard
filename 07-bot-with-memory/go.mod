@@ -1,4 +1,4 @@
-module 01-generate-room-description
+module 07-bot-with-memory
 
 go 1.23.4
 

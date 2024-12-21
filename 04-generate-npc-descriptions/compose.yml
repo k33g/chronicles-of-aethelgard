@@ -1,64 +1,21 @@
 services:
 
-  ollama-service:
-    image: ollama/ollama:0.5.4
-    volumes:
-      - ollama-data:/root/.ollama
-    ports:
-      - 11434:11434
-
-  download-llm-1:
-    image: curlimages/curl:8.6.0
-    entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"qwen2.5:0.5b\"}"]
-    depends_on:
-      ollama-service:
-        condition: service_started
-
-  download-llm-2:
-    image: curlimages/curl:8.6.0
-    entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"qwen2.5:1.5b\"}"]
-    depends_on:
-      ollama-service:
-        condition: service_started
-
-  download-llm-3:
-    image: curlimages/curl:8.6.0
-    entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"qwen2.5:3b\"}"]
-    depends_on:
-      ollama-service:
-        condition: service_started
-
-  download-llm-4:
-    image: curlimages/curl:8.6.0
-    entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"qwen2:1.5b-instruct\"}"]
-    depends_on:
-      ollama-service:
-        condition: service_started
-
   generate-npc-descriptions:
     image: golang:1.23.4-alpine
     entrypoint: 
       - /bin/sh
       - -c
       - cd /app && go mod tidy && go run main.go
-    #environment:
-      #- OLLAMA_HOST=http://ollama-service:11434
+    environment:
+      - OLLAMA_HOST=http://ollama-service:11434
       #- LLM=qwen2:1.5b-instruct
       #- LLM=qwen2.5:1.5b
       #- LLM=qwen2.5:3b
-      #- LLM=qwen2.5:0.5b
+      - LLM=qwen2.5:0.5b
     volumes:
       - ./:/app
-    depends_on:
-      download-llm-1:
-        condition: service_completed_successfully
-      download-llm-2:
-        condition: service_completed_successfully
-      download-llm-3:
-        condition: service_completed_successfully
-      download-llm-4:
-        condition: service_completed_successfully
-
+    networks:
+      - ollama-network
 #volumes:
 #  ollama-data:
 
@@ -67,3 +24,7 @@ volumes:
   ollama-data:
     external: true
     name: ollama_shared_data
+
+networks:
+  ollama-network:
+    external: true

@@ -1,6 +1,6 @@
 services:
 
-  generate-names:
+  bot-with-memory:
     image: golang:1.23.4-alpine
     entrypoint: 
       - /bin/sh
@@ -8,17 +8,16 @@ services:
       - cd /app && go mod tidy && go run main.go
     environment:
       - OLLAMA_HOST=http://ollama-service:11434
-      #- OLLAMA_HOST=http://host.docker.internal:11434
-      - LLM=qwen2.5:0.5b
+      #- LLM=qwen2.5:0.5b
+      - LLM=qwen2.5:1.5b
+      #- HTTP_PORT=5052
+    ports:
+      - 5052:8080
     volumes:
       - ./:/app
     networks:
       - ollama-network
 
-#volumes:
-#  ollama-data:
-
-# First, we need to create the volume: docker volume create ollama_shared_data
 volumes:
   ollama-data:
     external: true
