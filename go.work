@@ -11,9 +11,7 @@ use (
 
 	bot-cli
 
-	game
-
+	rpg-game-draft
 	rpg-game
-	tmp
 
 )
