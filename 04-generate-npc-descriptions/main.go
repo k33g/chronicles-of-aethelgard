@@ -66,13 +66,14 @@ func main() {
 
 	fmt.Println("🧙‍♂️", character.Name, "🧝‍♂️", character.Kind)
 
-	userContent := fmt.Sprintf("Create a %s with this name:%s", character.Kind, character.Name)
+	userContent := fmt.Sprintf("Using the steps below, create a %s with this name:%s", character.Kind, character.Name)
 
 	// Prompt construction
 	messages := []api.Message{
 		{Role: "system", Content: string(systemInstructions)},
-		{Role: "system", Content: string(generationInstructions)},
+		//{Role: "system", Content: string(generationInstructions)},
 		{Role: "user", Content: userContent},
+		{Role: "user", Content: string(generationInstructions)},
 	}
 
 	stream := true
@@ -83,7 +84,7 @@ func main() {
 		Messages: messages,
 		Options: map[string]interface{}{
 			//"temperature":   0.0,
-			"temperature":   0.8,
+			"temperature":   1.8,
 			"repeat_last_n": 2,
 			"top_k":         10,
 			"top_p":         0.5,
