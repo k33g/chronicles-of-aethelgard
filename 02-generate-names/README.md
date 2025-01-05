@@ -1,5 +1,12 @@
 # Générer des noms de personnages
 
+<!-- TODO: à re écrire -->
+
+```bash
+docker compose up --watch
+```
+
+
 ## Objectif
 
 - Générer des noms de personnages avec Ollama,

@@ -89,7 +89,6 @@ func main() {
 		log.Fatal("😡:", errJson)
 	}
 
-	fmt.Println()
-	//fmt.Println(jsonResult)
+	fmt.Println("\n🟦")
 
 }

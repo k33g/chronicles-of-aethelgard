@@ -87,6 +87,7 @@ func main() {
 			"repeat_last_n": 2,
 			"top_k":         10,
 			"top_p":         0.5,
+			//"num_ctx":       4096, // https://github.com/ollama/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values
 		},
 		//Format:    "json",
 		KeepAlive: &api.Duration{Duration: 1 * time.Minute},
@@ -116,6 +117,10 @@ func main() {
 		log.Fatal("😡:", errChat)
 	}
 
-	fmt.Println("📝", characterSheetId, "saved.")
+	fmt.Println("\n📝", characterSheetId, "saved.")
 
+	fmt.Println("\n🟦")
+	for {
+		// Loop forever
+	}
 }

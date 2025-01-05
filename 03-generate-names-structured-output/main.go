@@ -60,12 +60,13 @@ func main() {
 			}
 		`
 	*/
-	generationInstructions := `Generate a random name for a role-playing game character for a given kind (species/race). The output should be in JSON format, with the keys 'name' and 'kind'. Ensure the name is fantasy-themed.
+	generationInstructions := `Generate a random name for a role-playing game character for a given kind (species/race).
+	The output should be in JSON format, with the keys 'name' and 'kind'. Ensure the name is fantasy-themed.
 	`
 
 	//userContent := "Give a name for a Dwarf."
-	//userContent := "Give a name for an Elf."
-	userContent := "Give a name for a Human."
+	userContent := "Give a name for an Elf."
+	//userContent := "Give a name for a Human."
 
 	// Prompt construction
 	messages := []api.Message{
@@ -110,7 +111,6 @@ func main() {
 		log.Fatal("😡:", errJson)
 	}
 
-	fmt.Println()
-	//fmt.Println(jsonResult)
+	fmt.Println("\n🟦")
 
 }

@@ -3,11 +3,9 @@ services:
   ollama-service:
     image: ollama/ollama:0.5.4
     volumes:
-      - ollama-data:/root/.ollama
+      - ../ollama-data:/root/.ollama
     ports:
       - 11434:11434
-    networks:
-      - ollama-network
 
   download-llm-1:
     image: curlimages/curl:8.6.0
@@ -15,8 +13,6 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
-    networks:
-      - ollama-network
 
   download-llm-2:
     image: curlimages/curl:8.6.0
@@ -24,8 +20,6 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
-    networks:
-      - ollama-network
 
   download-llm-3:
     image: curlimages/curl:8.6.0
@@ -33,35 +27,7 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
-    networks:
-      - ollama-network
 
-  download-llm-4:
-    image: curlimages/curl:8.6.0
-    entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"qwen2:1.5b-instruct\"}"]
-    depends_on:
-      ollama-service:
-        condition: service_started
-    networks:
-      - ollama-network
-
-  #download-llm-5:
-  #  image: curlimages/curl:8.6.0
-  #  entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"mxbai-embed-large:latest\"}"]
-  #  depends_on:
-  #    ollama-service:
-  #      condition: service_started
-  #  networks:
-  #    - ollama-network
-
-  #download-llm-6:
-  #  image: curlimages/curl:8.6.0
-  #  entrypoint: ["curl", "ollama-service:11434/api/pull", "-d", "{\"name\": \"snowflake-arctic-embed:33m\"}"]
-  #  depends_on:
-  #    ollama-service:
-  #      condition: service_started
-  #  networks:
-  #    - ollama-network
 
   golang-version:
     image: golang:1.23.4-alpine
@@ -70,12 +36,3 @@ services:
       - -c
       - go version
 
-# First, we need to create the volume: docker volume create ollama_shared_data
-volumes:
-  ollama-data:
-    external: true
-    name: ollama_shared_data
-
-networks:
-  ollama-network:
-    external: true

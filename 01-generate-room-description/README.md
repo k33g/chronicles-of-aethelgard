@@ -1,5 +1,13 @@
 # Générer des descriptions de salles
 
+<!-- TODO: à re écrire -->
+
+```bash
+docker compose up --watch
+```
+
+
+
 Il y a plusieurs façons de lancer le programme.
 
 ## Si Ollama et Go sont installés en local

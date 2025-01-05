@@ -1,15 +1,6 @@
 # Initialisation
 
-## Volume partagé et réseau partagé
-
-```bash
-docker volume create ollama_shared_data
-docker network create ollama-network
-```
-
-Ce volume et ce network seront utilisés par tous les autres projets Docker Compose
-
-## Téléchargement des modèles
+## Téléchargement des modèles et démarrage d'ollama
 
 ```bash
 docker compose up
@@ -33,17 +24,8 @@ docker exec -it 00-initialize-ollama-service-1 bash
 ollama run qwen2.5:0.5b
 describe a room in a dungeon
 ```
-> Ctrl + D pour quitter Ollama
-
-```bash
-docker exec -it 00-initialize-ollama-service-1 bash
-# Then
-ollama run qwen2.5:1.5b
-describe a room in a dungeon
-```
-
-> Ctrl + D puis `exit` pour sortir du conteneur
-
+> - Ctrl + D pour quitter Ollama
+> - `exit` pour sortir du conteneur
 
 ```bash
 docker compose logs golang-version

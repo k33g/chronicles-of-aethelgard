@@ -1,5 +1,12 @@
 # Générer des noms de personnages / Version alternative
 
+<!-- TODO: à re écrire et faire des schemas ... -->
+
+```bash
+docker compose up --watch
+```
+
+
 ## Objectif
 
 - Générer des noms de personnages avec Ollama,

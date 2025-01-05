@@ -40,12 +40,13 @@ func main() {
 	Ensure the description is fantasy-themed.
 	`
 
-	userContent := "Generate a room description for the name 'The Dark Cave' with the above instructions."
+	userContent := "Generate a room description for the name 'The Forgotten Library' with the above instructions."
 	/*
 		The Grand Entrance
 		The Hall of Whispers
 		The Chamber of Echoes
 		The Forgotten Library
+		The Dark Cave
 	*/
 
 	// Prompt construction
@@ -82,5 +83,5 @@ func main() {
 		log.Fatal("😡:", errChat)
 	}
 
-	fmt.Println()
+	fmt.Println("\n🟦")
 }

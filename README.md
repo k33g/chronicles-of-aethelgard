@@ -1,5 +1,12 @@
 # Chronicles of Aethelgard
 
+à la fois un moyen de jouer avec Ollama (sans GPU) et d'utiliser Docker Compose.
+
+<!-- Construire le compose file au fur et a mesure
+on evite la partie data externe et le network partagé 
+
+-->
+
 ## Pré-requis
 
 ### Docker
