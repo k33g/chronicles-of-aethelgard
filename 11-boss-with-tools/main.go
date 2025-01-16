@@ -78,6 +78,8 @@ func main() {
 	jsonTools, _ := json.MarshalIndent(tools, "", "  ")
 
 	fmt.Println("🛠️", string(jsonTools))
+	//fmt.Println(string(jsonTools))
+
 
 	// Transform the tools to Ollama format
 	var toolsList api.Tools
@@ -111,57 +113,17 @@ func main() {
 
 		userContent := data["question"]
 
-		// Prompt construction
-		messages := []api.Message{
-			{Role: "system", Content: systemInstructions},
-			{Role: "system", Content: string(personality)},
-			{Role: "user", Content: userContent},
-		}
-
-		stream := true
-		noStream  := false
-
-		// Configuration
-		options := map[string]interface{}{
-			"temperature":   0.8,
-			"repeat_last_n": 2,
-			"top_k":         10,
-			"top_p":         0.5,
-		}
-
-		req := &api.ChatRequest{
-			Model:     model,
-			Messages:  messages,
-			Options:   options,
-			KeepAlive: &api.Duration{Duration: 1 * time.Minute},
-			Stream:    &stream,
-		}
-
-		answer := ""
-		respFunc := func(resp api.ChatResponse) error {
-
-			response.Write([]byte(resp.Message.Content))
-
-			fmt.Print(resp.Message.Content)
-			answer += resp.Message.Content
-
-			flusher.Flush()
-
-			return nil
-		}
-
-		err = client.Chat(ctx, req, respFunc)
-		if err != nil {
-			log.Fatal("😡:", err)
-		}
+		// first check if the user wants to escape (use the tool)
+		noStream := false
+		escape := false
 		// first try to add a specific question to exit the place/game
 		// detect if the user want to trigger an action (from the user question only)
 		// New prompt construction
-		messages = []api.Message{
+		messages := []api.Message{
 			{Role: "user", Content: userContent},
 		}
-		req = &api.ChatRequest{
-			Model: model, // The model must support the tools
+		req := &api.ChatRequest{
+			Model:    model, // The model must support the tools
 			Messages: messages,
 			Options: map[string]interface{}{
 				"temperature":   0.0,
@@ -173,32 +135,79 @@ func main() {
 		err = client.Chat(ctx, req, func(resp api.ChatResponse) error {
 			//fmt.Println("🖐️", resp.Message.ToolCalls)
 			/*
-			for _, toolCall := range resp.Message.ToolCalls {
-				fmt.Println(toolCall.Function.Name, toolCall.Function.Arguments)
-			}
+				for _, toolCall := range resp.Message.ToolCalls {
+					fmt.Println(toolCall.Function.Name, toolCall.Function.Arguments)
+				}
 			*/
+			// if no tools exit
 			if len(resp.Message.ToolCalls) == 0 {
 				return nil
 			}
+			escape = true
 
 			toolCall := resp.Message.ToolCalls[0]
 			fmt.Println(toolCall.Function.Name, toolCall.Function.Arguments)
-			
 
 			jsonToolCall, _ := json.MarshalIndent(toolCall, "", "  ")
-			response.Write([]byte("\n🛠️ :\n" + string(jsonToolCall)))
-			//response.Write(jsonToolCall)
-			flusher.Flush()
+			//response.Write([]byte("\n🛠️ :\n" + string(jsonToolCall)))
+			response.Write(jsonToolCall)
 
+			flusher.Flush()
 			// Then make the call to the tool
 
-	
 			return nil
 		})
-	
-		if err != nil {
-			log.Fatalln("😡", err)
+
+		if escape == false {
+			// Prompt construction
+			messages = []api.Message{
+				{Role: "system", Content: systemInstructions},
+				{Role: "system", Content: string(personality)},
+				{Role: "user", Content: userContent},
+			}
+
+			stream := true
+
+			// Configuration
+			options := map[string]interface{}{
+				"temperature":   0.8,
+				"repeat_last_n": 2,
+				"top_k":         10,
+				"top_p":         0.5,
+			}
+
+			req = &api.ChatRequest{
+				Model:     model,
+				Messages:  messages,
+				Options:   options,
+				KeepAlive: &api.Duration{Duration: 1 * time.Minute},
+				Stream:    &stream,
+			}
+
+			answer := ""
+			respFunc := func(resp api.ChatResponse) error {
+
+				response.Write([]byte(resp.Message.Content))
+
+				fmt.Print(resp.Message.Content)
+				answer += resp.Message.Content
+
+				flusher.Flush()
+
+				return nil
+			}
+
+			err = client.Chat(ctx, req, respFunc)
+			if err != nil {
+				log.Fatal("😡:", err)
+			}
 		}
+
+		/*
+			if err != nil {
+				log.Fatalln("😡", err)
+			}
+		*/
 
 	})
 

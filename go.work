@@ -16,6 +16,9 @@ use (
 	12-call-room-services
 	13-call-monster-service
 	14-chat-with-bot-services
+	15-chat-with-bot-services
+
+	16-chat-with-boss
 
 	bot-cli
 
