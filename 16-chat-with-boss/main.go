@@ -34,20 +34,23 @@ func main() {
 
 		sphinxAnswer, _ := services.SpeakWithSphinx(input)
 		//services.SpeakWithSphinx(input)
+		fmt.Println()
 
 		// Test the Sphinx answer
 		var toolCall ToolCall
 		err := json.Unmarshal([]byte(sphinxAnswer), &toolCall)
 		if err != nil {
-			fmt.Println("😡:", err)
-		}
-		if toolCall.Function.Arguments.First == "yellow" && toolCall.Function.Arguments.Second == "black" && toolCall.Function.Arguments.Third == "green" {
-			fmt.Println()
-			fmt.Println("🎉: You escaped!")
-			break
+			//fmt.Println("😡: Error unmarshalling Sphinx answer")
+			// if error it's not a tool call
 		} else {
-			fmt.Println()
-			fmt.Println("😡: You are still trapped!")
+			if toolCall.Function.Arguments.First == "yellow" && toolCall.Function.Arguments.Second == "black" && toolCall.Function.Arguments.Third == "green" {
+				fmt.Println()
+				fmt.Println("🎉: You escaped!")
+				break
+			} else {
+				fmt.Println()
+				fmt.Println("😡: You are still trapped!")
+			}
 		}
 
 	}
