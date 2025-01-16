@@ -64,8 +64,8 @@ func main() {
 	The output should be in JSON format, with the keys 'name' and 'kind'. Ensure the name is fantasy-themed.
 	`
 
-	//userContent := "Give a name for a Dwarf."
-	userContent := "Give a name for an Elf."
+	userContent := "Give a name for a Dwarf."
+	//userContent := "Give a name for an Elf."
 	//userContent := "Give a name for a Human."
 
 	// Prompt construction
@@ -82,10 +82,11 @@ func main() {
 		Model:    model,
 		Messages: messages,
 		Options: map[string]interface{}{
-			"temperature":   0.0,
-			"repeat_last_n": 2,
-			"top_k":         10,
-			"top_p":         0.5,
+			"temperature":    0.0,
+			"repeat_last_n":  2,
+			"repeat_penalty": 1.8,
+			"top_k":          10,
+			"top_p":          0.5,
 		},
 		Format:    json.RawMessage(jsonModel), // ✋✋✋
 		KeepAlive: &api.Duration{Duration: 1 * time.Minute},

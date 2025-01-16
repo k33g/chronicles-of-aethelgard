@@ -8,6 +8,8 @@
     "editor.detectIndentation": true,
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 5000,
+    "workbench.tree.indent": 15,
+    "window.zoomLevel": 0,
     "[markdown]": {
         "editor.unicodeHighlight.ambiguousCharacters": false,
         "editor.unicodeHighlight.invisibleCharacters": false,
@@ -47,5 +49,4 @@
     "[go]": {
         "editor.fontSize": 14,
     },
-    "python.defaultInterpreterPath": "~/.venv/bin/python"
 }

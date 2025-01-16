@@ -1,0 +1,45 @@
+services:
+
+  ollama-service:
+    image: k33g/chronicles-of-aethelgard:0.0.2
+    environment:
+      - OLLAMA_FLASH_ATTENTION=1
+      - OLLAMA_KV_CACHE_TYPE=q4_0
+    ports:
+      - 11434:11434
+
+  room-services:
+    build:
+      context: ../05-room-services
+      dockerfile: Dockerfile
+    command: go run main.go ; sleep infinity
+    environment:
+      - OLLAMA_HOST=http://ollama-service:11434
+      #- LLM=qwen2.5:0.5b
+      - LLM=qwen2.5:1.5b
+    depends_on:
+      ollama-service:
+        condition: service_started
+    #ports:
+    #  - 5050:8080 # we don't need to expose the port, explain why
+    volumes:
+      - ../05-room-services/:/app
+    #develop:
+    #  watch:
+    #    - action: rebuild
+    #      path: ./main.go
+  
+  main:
+    build: .
+    command: go run main.go; sleep infinity
+    environment:
+      - ROOM_SERVICES_HOST=http://room-services:8080
+    depends_on:
+      room-services:
+        condition: service_started
+    volumes:
+      - ./:/app
+    develop:
+      watch:
+        - action: rebuild
+          path: ./main.go

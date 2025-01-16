@@ -19,17 +19,12 @@ type Character struct {
 }
 
 func GetCharacter() (Character, error) {
-	// Read the JSON file
-	file, errRead := os.ReadFile("./character.json")
-	if errRead != nil {
-		return Character{}, errRead
-	}
-
-	// Unmarshal the JSON data into a struct
 	var character Character
-	errUnmarshall := json.Unmarshal(file, &character)
-	if errUnmarshall != nil {
-		return Character{}, errUnmarshall
+	character.Name = os.Getenv("CHARACTER_NAME")
+	character.Kind = os.Getenv("CHARACTER_KIND")
+
+	if character.Name == "" || character.Kind == "" {
+		return character, fmt.Errorf("😡: character name or kind not set")
 	}
 
 	return character, nil
@@ -56,6 +51,7 @@ func main() {
 
 	ollamaUrl := os.Getenv("OLLAMA_HOST")
 	model := os.Getenv("LLM")
+	// TODO: test if variables are empty
 
 	fmt.Println("🌍", ollamaUrl, "📕", model)
 
@@ -145,24 +141,6 @@ func main() {
 
 			return nil
 		}
-
-		// TODO: add an option to stop the completion
-
-		/*
-			_, err = completion.ChatStream(ollamaUrl, query,
-				func(answer llm.Answer) error {
-					log.Println("📝:", answer.Message.Content)
-					response.Write([]byte(answer.Message.Content))
-
-					flusher.Flush()
-					if !shouldIStopTheCompletion {
-						return nil
-					} else {
-						return errors.New("🚫 Cancelling request")
-					}
-				})
-
-		*/
 
 		err = client.Chat(ctx, req, respFunc)
 

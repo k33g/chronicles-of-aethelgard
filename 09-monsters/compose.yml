@@ -1,0 +1,23 @@
+services:
+
+  ollama-service:
+    image: k33g/chronicles-of-aethelgard:0.0.2
+    ports:
+      - 11434:11434
+
+  monster-service:
+    build: .
+    command: go run main.go; sleep infinity
+    environment:
+      - OLLAMA_HOST=http://ollama-service:11434
+      - LLM=qwen2.5:0.5b
+      #- LLM=qwen2.5:1.5b
+    ports:
+      - 5053:8080
+    volumes:
+      - ./:/app
+    develop:
+      watch:
+        - action: rebuild
+          path: ./main.go
+ 

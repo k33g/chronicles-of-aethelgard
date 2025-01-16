@@ -40,7 +40,7 @@ func main() {
 	Ensure the description is fantasy-themed.
 	`
 
-	userContent := "Generate a room description for the name 'The Forgotten Library' with the above instructions."
+	userContent := "Generate a room description for the name 'The Chamber of Echoes' with the above instructions."
 	/*
 		The Grand Entrance
 		The Hall of Whispers
@@ -63,10 +63,11 @@ func main() {
 		Model:    model,
 		Messages: messages,
 		Options: map[string]interface{}{
-			"temperature":   0.8,
-			"repeat_last_n": 2,
-			"top_k":         10,
-			"top_p":         0.5,
+			"temperature":    1.8,
+			"repeat_last_n":  2,
+			"repeat_penalty": 2.2,
+			"top_k":          10,
+			"top_p":          0.5,
 		},
 		KeepAlive: &api.Duration{Duration: 1 * time.Minute},
 		Stream:    &stream,

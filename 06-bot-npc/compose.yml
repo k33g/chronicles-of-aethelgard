@@ -1,27 +1,43 @@
 services:
 
+  ollama-service:
+    image: k33g/chronicles-of-aethelgard:0.0.2
+    ports:
+      - 11434:11434
+
   bot-npc:
-    image: golang:1.23.4-alpine
-    entrypoint: 
-      - /bin/sh
-      - -c
-      - cd /app && go mod tidy && go run main.go
+    build: .
+    command: go run main.go; sleep infinity
     environment:
       - OLLAMA_HOST=http://ollama-service:11434
       - LLM=qwen2.5:0.5b
-      #- HTTP_PORT=5051
+      #- LLM=qwen2.5:1.5b
+      - CHARACTER_NAME=Elvira
+      - CHARACTER_KIND=Elf
+    depends_on:
+      ollama-service:
+        condition: service_started
     ports:
       - 5051:8080
     volumes:
       - ./:/app
-    networks:
-      - ollama-network
+    develop:
+      watch:
+        - action: rebuild
+          path: ./main.go
 
-volumes:
-  ollama-data:
-    external: true
-    name: ollama_shared_data
-
-networks:
-  ollama-network:
-    external: true
+  bot-grym:
+    build: .
+    command: go run main.go; sleep infinity
+    environment:
+      - OLLAMA_HOST=http://ollama-service:11434
+      - LLM=qwen2.5:0.5b
+      - CHARACTER_NAME=Grym
+      - CHARACTER_KIND=Dwarf
+    depends_on:
+      ollama-service:
+        condition: service_started
+    ports:
+      - 5052:8080
+    volumes:
+      - ./:/app

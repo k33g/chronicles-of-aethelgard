@@ -1,0 +1,47 @@
+services:
+
+  ollama-service:
+    image: k33g/chronicles-of-aethelgard:0.0.2
+    ports:
+      - 11434:11434
+  
+  # docker compose up ollama-service chunks-service --build
+  chunks-service:
+    build: .
+    command: go test
+    environment:
+      - OLLAMA_HOST=http://ollama-service:11434
+      - EMBEDDINGS_LLM=snowflake-arctic-embed:33m
+      - CHARACTER_NAME=Grym
+      - CHARACTER_KIND=dwarf
+    volumes:
+      - ./:/app
+    depends_on:
+      ollama-service:
+        condition: service_started
+
+  bot-with-memory:
+    build: .
+    command: go run main.go; sleep infinity
+    environment:
+      - OLLAMA_HOST=http://ollama-service:11434
+      #- LLM=qwen2.5:1.5b
+      - LLM=qwen2.5:0.5b
+      - EMBEDDINGS_LLM=snowflake-arctic-embed:33m
+      #- HTTP_PORT=5052
+      - CHARACTER_NAME=Grym
+      - CHARACTER_KIND=dwarf
+    ports:
+      - 5052:8080
+    volumes:
+      - ./:/app
+    depends_on:
+      ollama-service:
+        condition: service_started
+      chunks-service:
+        condition: service_completed_successfully
+    develop:
+      watch:
+        - action: rebuild
+          path: ./main.go
+

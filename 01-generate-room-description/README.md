@@ -1,5 +1,6 @@
 # Générer des descriptions de salles
 
+
 <!-- TODO: à re écrire -->
 
 ```bash

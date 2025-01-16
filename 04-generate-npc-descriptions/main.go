@@ -84,10 +84,12 @@ func main() {
 		Messages: messages,
 		Options: map[string]interface{}{
 			//"temperature":   0.0,
-			"temperature":   1.8,
-			"repeat_last_n": 2,
-			"top_k":         10,
-			"top_p":         0.5,
+			"temperature":    1.0,
+			"repeat_last_n":  2,
+			"repeat_penalty": 2.0,
+			"top_k":          10,
+			"top_p":          0.5,
+
 			//"num_ctx":       4096, // https://github.com/ollama/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values
 		},
 		//Format:    "json",

@@ -2,7 +2,7 @@
 SERVICE_URL="http://localhost:5052"
 read -r -d '' DATA <<- EOM
 {
-  "question":"Do you know me? What is my name?"
+  "question":"What is my name"
 }
 EOM
 
@@ -15,3 +15,4 @@ curl --no-buffer ${SERVICE_URL}/api/chat \
     -d "${DATA}" 
 
 echo ""
+# Do you know me? What is my name?

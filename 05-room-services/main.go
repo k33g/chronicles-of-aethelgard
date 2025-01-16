@@ -66,8 +66,13 @@ func main() {
 			response.Write([]byte("😡 Error: expected http.ResponseWriter to be an http.Flusher"))
 		}
 
-		userContent := "Generate a short room name for a miedeval dungeon in a D&D game."
-
+		userContent := `
+		Generate a short random room name for a miedeval dungeon in a D&D game.
+		Generate only one unique name, no description is needed.
+		<Expected Output>
+		The name of the room
+		</Expected Output>
+		`
 		// Prompt construction
 		messages := []api.Message{
 			{Role: "system", Content: systemInstructions},
@@ -79,10 +84,10 @@ func main() {
 
 		// Configuration
 		options := map[string]interface{}{
-			"temperature":   1.0,
+			"temperature":   2.0,
 			"repeat_last_n": 2,
-			"top_k":         10,
-			"top_p":         0.5,
+			//"top_k":         10,
+			//"top_p":         0.5,
 		}
 
 		req := &api.ChatRequest{

@@ -2,7 +2,7 @@
 SERVICE_URL="http://localhost:5050"
 read -r -d '' DATA <<- EOM
 {
-  "room_name":"Tempest's Shadow Haven"
+  "room_name":"Mieval Caves"
 }
 EOM
 

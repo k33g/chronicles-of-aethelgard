@@ -43,8 +43,8 @@ func main() {
 		}
 	`
 
-	//userContent := "Give a name for a Dwarf."
-	userContent := "Give a name for an Elf."
+	userContent := "Give a name for a Dwarf."
+	//userContent := "Give a name for an Elf."
 	//userContent := "Give a name for a Human."
 
 	// Prompt construction
@@ -61,10 +61,11 @@ func main() {
 		Model:    model,
 		Messages: messages,
 		Options: map[string]interface{}{
-			"temperature":   0.0,
-			"repeat_last_n": 2,
-			"top_k":         10,
-			"top_p":         0.5,
+			"temperature":    0.0,
+			"repeat_last_n":  2,
+			"repeat_penalty": 1.8,
+			"top_k":          10,
+			"top_p":          0.5,
 		},
 		Format:    json.RawMessage(`"json"`),
 		KeepAlive: &api.Duration{Duration: 1 * time.Minute},

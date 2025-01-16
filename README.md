@@ -2,10 +2,18 @@
 
 à la fois un moyen de jouer avec Ollama (sans GPU) et d'utiliser Docker Compose.
 
+faire essentiellement travailler les gens sur les prompts 
+
+à la fin il faudra tout mettre dans un même compose file
+
 <!-- Construire le compose file au fur et a mesure
 on evite la partie data externe et le network partagé 
 
 -->
+
+## Remarques
+
+Expliquer pourquoi je ne fais pas de go build / ou dire que normalement je devrair le faire
 
 ## Pré-requis
 
@@ -76,3 +84,8 @@ Pas forcément très précis, mais ils sont très pratiques pour travailler sur 
 - Travailler sur les prompts
 - On ne codera quasiment pas
 - On va créer tous les éléments / outils pour aider à jouer à un jeu de rôle
+
+
+#### 12-call-room-services
+
+commencer l'assemblage avec compose

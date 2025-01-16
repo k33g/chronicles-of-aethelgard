@@ -3,15 +3,23 @@ go 1.23.4
 use (
 	01-generate-room-description
 	02-generate-names
-	03-generate-names
+	03-generate-names-structured-output
 	04-generate-npc-descriptions
 	05-room-services
 	06-bot-npc
 	07-bot-with-memory
+	08-bot-with-rag
+	09-monsters
+	10-end-level-boss
+	11-boss-with-tools
+
+	12-call-room-services
+	13-call-monster-service
+	14-chat-with-bot-services
 
 	bot-cli
 
-	rpg-game-draft
-	rpg-game
+	//rpg-game-draft
+	rpg
 
 )
