@@ -1,3 +1,4 @@
-character.json
+character.*.json
+character-sheet-*.md
 tips.md
 backup

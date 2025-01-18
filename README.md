@@ -25,6 +25,10 @@ Nous verrons comment:
 2. Générer des noms de personnages (en JSON): [`02-generate-names`](02-generate-names/README.md)
 3. Pareil mais en mieux: [`03-generate-names-structured-output`](03-generate-names-structured-output/README.md)
 4. Génerer une fiche de personnage: [`04-generate-npc-descriptions`](04-generate-npc-descriptions/README.md)
+5. Créer un micro-service pour obtenir une description de pièce dans un donjon: [`05-room-services`](05-room-services/README.md)
+
+
+
 🚧
 
 Et à la fin nous essaieront de regrouper tout ça dans un mini "Dungeon Crawler"

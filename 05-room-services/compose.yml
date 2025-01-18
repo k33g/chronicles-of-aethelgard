@@ -2,7 +2,6 @@ services:
 
   ollama-service:
     image: k33g/chronicles-of-aethelgard:0.0.2
-    #image: k33g/chronicles-of-aethelgard:experimental
     ports:
       - 11434:11434
 
@@ -11,9 +10,7 @@ services:
     command: go run main.go; sleep infinity
     environment:
       - OLLAMA_HOST=http://ollama-service:11434
-      #- LLM=tinydolphin
       - LLM=qwen2.5:0.5b
-      #- LLM=qwen2.5:1.5b
     depends_on:
       ollama-service:
         condition: service_started

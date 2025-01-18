@@ -48,6 +48,14 @@ Modifiez 3 fois le code pour pouvoir générer 3 feuilles de personnage (il faut
 
 > Vous pouvez jouer avec la température si les résultat ne vous conviennent pas.
 
+Ensuite gardez les fichiers markdown générés (`character-sheet-*.md`), nous les ré-utiliserons plus tard.
+> vous pouvez les copier dans:
+- `06-bot-npc`
+- `07-bot-with-memory`
+- `08-bot-with-rag`
+
+
+
 ## Questions ?
 
 ## Quittez Docker Compose
@@ -55,8 +63,3 @@ Modifiez 3 fois le code pour pouvoir générer 3 feuilles de personnage (il faut
 [README](../README.md)
 
 
-
-- Essayer d'écrire les instructions pour générer des descriptions de PNJ.
-Guider pour le faire (une sorte de template)
-- Essayer avec différents modèles.
-- Changer la temperature

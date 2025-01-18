@@ -41,17 +41,10 @@ func main() {
 		log.Fatal("😡:", errCli)
 	}
 
-	systemInstructions := `# IDENTITY and PURPOSE
-		You are an expert NPC generator for games like D&D 5th edition. 
-		You have freedom to be creative to get the best possible output.
-	`
-	// 	The output must be in text format, with the name of the room as the title and then the description of the room:
+	// TODO:
+	systemInstructions := ``
 
-	generationInstructions := `Your job is to generate a description of a room in a fantasy setting using the name given by the user.
-	The output is the description of the room.
-	Speak only in English, avoid Chinese ideogram.
-	Ensure the description is fantasy-themed.
-	`
+	generationInstructions := ``
 
 	mux := http.NewServeMux()
 
@@ -173,24 +166,6 @@ func main() {
 
 			return nil
 		}
-
-		// TODO: add an option to stop the completion
-
-		/*
-			_, err = completion.ChatStream(ollamaUrl, query,
-				func(answer llm.Answer) error {
-					log.Println("📝:", answer.Message.Content)
-					response.Write([]byte(answer.Message.Content))
-
-					flusher.Flush()
-					if !shouldIStopTheCompletion {
-						return nil
-					} else {
-						return errors.New("🚫 Cancelling request")
-					}
-				})
-
-		*/
 
 		err = client.Chat(ctx, req, respFunc)
 
