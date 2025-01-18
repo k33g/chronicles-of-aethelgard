@@ -5,7 +5,7 @@ services:
     ports:
       - 11434:11434
 
-  bot-with-memory:
+  bot-elvira-with-memory:
     build: .
     command: go run main.go; sleep infinity
     environment:

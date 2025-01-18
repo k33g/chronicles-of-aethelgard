@@ -14,14 +14,14 @@ type Request struct {
 }
 
 func SpeakWithGrym(question string) (string, error) {
-	return speakWithBot(os.Getenv("BOT_GRYM_SERVICE_HOST"), question)
+	return SpeakWithBot(os.Getenv("BOT_GRYM_SERVICE_HOST"), question)
 }
 
 func SpeakWithElvira(question string) (string, error) {
-	return speakWithBot(os.Getenv("BOT_ELVIRA_SERVICE_HOST"), question)
+	return SpeakWithBot(os.Getenv("BOT_ELVIRA_SERVICE_HOST"), question)
 }
 
-func speakWithBot(botServiceHost, question string) (string, error) {
+func SpeakWithBot(botServiceHost, question string) (string, error) {
 	botServiceEndPoint := "/api/chat"
 	// Create a Request
 	data := Request{

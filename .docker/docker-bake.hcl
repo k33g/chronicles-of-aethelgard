@@ -5,6 +5,7 @@ variable "REPO" {
 
 variable "TAG" {
   default = "0.0.2"
+  #default = "experimental"
 }
 
 group "default" {

@@ -27,11 +27,15 @@ type Item struct {
 	Value       int    // Pour l'or : valeur en pièces
 }
 
+/* === MONSTER DESCRIPTIOM === */
+
 type Monster struct {
 	Name        string
+	Description string
 	HP          int
 	AttackPower int
 	CurrentHP   int
+	Symbol      string
 }
 
 type NPCType string
@@ -43,9 +47,17 @@ const (
 )
 
 type NPC struct {
-	Type     NPCType
-	Messages []string
+	Type   NPCType
+	Symbol string
+	//Messages []string
 }
+
+/*
+Dans 07-bot-with-memory
+il y a les feuille de personnages
+character-sheet-<name>.md
+
+*/
 
 type Room struct {
 	Description  string

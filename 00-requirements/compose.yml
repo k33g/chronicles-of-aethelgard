@@ -8,8 +8,5 @@ services:
   golang-version:
     image: golang:1.23.4-alpine
     command: go version
-    #entrypoint: 
-    #  - /bin/sh
-    #  - -c
-    #  - go version
+
 

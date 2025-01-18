@@ -73,6 +73,23 @@ services:
     volumes:
       - ../07-bot-with-memory:/app
 
+  bot-ethan:
+    build:
+      context: ../07-bot-with-memory
+      dockerfile: Dockerfile
+    command: go run main.go; sleep infinity
+    environment:
+      - OLLAMA_HOST=http://ollama-service:11434
+      - LLM=qwen2.5:0.5b
+      - CHARACTER_NAME=Ethan
+      - CHARACTER_KIND=Human
+    depends_on:
+      ollama-service:
+        condition: service_started
+    volumes:
+      - ../07-bot-with-memory:/app
+
+
 
   main:
     build: .
@@ -84,6 +101,7 @@ services:
       - MONSTER_SERVICE_HOST=http://monster-service:8080
       - BOT_GRYM_SERVICE_HOST=http://bot-grym:8080
       - BOT_ELVIRA_SERVICE_HOST=http://bot-elvira:8080
+      - BOT_ETHAN_SERVICE_HOST=http://bot-ethan:8080
     depends_on:
       room-services:
         condition: service_started
@@ -92,6 +110,8 @@ services:
       bot-grym:
         condition: service_started
       bot-elvira:
+        condition: service_started
+      bot-ethan:
         condition: service_started
     volumes:
       - ./:/app

@@ -14,10 +14,6 @@ import (
 func main() {
 
 	ctx := context.Background()
-	//errEnv := godotenv.Load()
-	//if errEnv != nil {
-	//	log.Fatal("😡:", errEnv)
-	//}
 
 	ollamaUrl := os.Getenv("OLLAMA_HOST")
 	model := os.Getenv("LLM")
@@ -30,8 +26,8 @@ func main() {
 	}
 
 	systemInstructions := `# IDENTITY and PURPOSE
-		You are an expert NPC generator for games like D&D 5th edition. 
-		You have freedom to be creative to get the best possible output.
+	You are an expert NPC generator for games like D&D 5th edition. 
+	You have freedom to be creative to get the best possible output.
 	`
 
 	generationInstructions := `Generate a random name for a role-playing game character for a given kind (species/race). The output should be in JSON format, with the keys 'name' and 'kind'. Ensure the name is fantasy-themed.
@@ -43,8 +39,8 @@ func main() {
 		}
 	`
 
-	userContent := "Give a name for a Dwarf."
-	//userContent := "Give a name for an Elf."
+	//userContent := "Give a name for a Dwarf."
+	userContent := "Give a name for an Elf."
 	//userContent := "Give a name for a Human."
 
 	// Prompt construction

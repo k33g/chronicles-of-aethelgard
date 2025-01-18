@@ -20,9 +20,6 @@ use (
 
 	16-chat-with-boss
 
-	bot-cli
-
-	//rpg-game-draft
 	rpg
 
 )

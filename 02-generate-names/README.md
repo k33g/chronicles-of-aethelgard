@@ -1,26 +1,27 @@
 # Générer des noms de personnages
 
-<!-- TODO: à re écrire -->
+## Que voulons nous faire ?
+
+- Générer des noms de personnages de JdR "dans un style médiéval"
+- Obtenir un format de sortie en JSON
+- Sauver le résultat
+
+## Allons voir le code
+
+> - 👋 il ressemble beaucoup au code précédent
+> - mais il faut que l'on explique au LLM de façon précise que l'on veut du JSON, structuré d'une manière spécifique
+
+[Le code](main.go)
+
+## Que font le 🐳 compose file & le Dockerfile ?
+
+- [Le 🐳 compose file](compose.yml)
+- [Dockerfile](Dockerfile)
+
+## Lancer l'application
 
 ```bash
 docker compose up --watch
-```
-
-
-## Objectif
-
-- Générer des noms de personnages avec Ollama,
-- Obtenir une format de sortie en JSON
-
-
-## Aller lire le programme
-
-
-## Lancer le programme
-
-Et vous lancez le programme avec:
-```bash
-docker compose up
 ```
 
 Vous pouvez voir les résultats avec:
@@ -28,19 +29,23 @@ Vous pouvez voir les résultats avec:
 docker compose logs generate-names
 ```
 
-> ✋ pour les autres méthodes de lancement, voir le README de l'étape précédente.
+## 🚧 Travaillez un peu
 
-## Il existe maintenant une autre méthode pour générer du JSON
+- 👋 jouez avec la température
+- génerez plusieurs personnages de plusieurs races
 
+## Autre méthode pour générer du JSON
 
-## Remarques
+La méthode que je viens de vous présenter n'est pas fiable à 100%, mais il existe depuis peu une autre méthode pour générer du JSON avec un LLM.
 
-le format JSON ne va pas forcément fonctionner avec tous les modèles (structured output)
+On parle de **Structured Output**. 
+> ✋ cela ne fonctionnera pas avec tous les modèles
 
-- https://ollama.com/blog/structured-outputs
-- https://k33g.hashnode.dev/generating-json-with-an-llm-the-old-method-and-the-new-method 
+- Blog post officiel: https://ollama.com/blog/structured-outputs
+- Blog post écrit par votre serviteur: https://k33g.hashnode.dev/generating-json-with-an-llm-the-old-method-and-the-new-method 
 
-## Jouez avec les paramètres
+## Questions ?
 
-- 👋 jouer avec la température
-- génerer plusieurs personnages de plusieurs races
+## Quittez Docker Compose
+
+[README](../README.md)

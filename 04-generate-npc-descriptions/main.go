@@ -19,7 +19,11 @@ type Character struct {
 
 func GetCharacter() (Character, error) {
 	// Read the JSON file
-	file, errRead := os.ReadFile("./character.json")
+	
+	file, errRead := os.ReadFile("./character.elvira.json")
+	//file, errRead := os.ReadFile("./character.ethan.json")
+	//file, errRead := os.ReadFile("./character.grym.json")
+
 	if errRead != nil {
 		return Character{}, errRead
 	}
@@ -123,7 +127,7 @@ func main() {
 	fmt.Println("\n📝", characterSheetId, "saved.")
 
 	fmt.Println("\n🟦")
-	for {
-		// Loop forever
-	}
+	
+	// Loop forever
+	//for {}
 }

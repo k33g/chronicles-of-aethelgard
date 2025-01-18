@@ -23,18 +23,4 @@ The result should be detailed and immersive, ready to be directly used in a role
 
 Generate a markdown document with multiple sections, including a title, a subtitle, and three paragraphs. Each section should be separated by a blank line (carriage return). Ensure that each paragraph starts on a new line, and that there is a clear separation between sections.
 
-**Expected Output:**
-
-```markdown
-# Title of the Document
-
-## Subtitle of the Document
-
-This is the first paragraph. It provides an introduction to the topic.
-
-This is the second paragraph. It delves deeper into the details of the topic.
-
-This is the third paragraph. It concludes the discussion and offers final thoughts.
-```
-
 - DO NOT COMPLAIN about the task for any reason.

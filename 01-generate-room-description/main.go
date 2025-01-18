@@ -25,18 +25,13 @@ func main() {
 	}
 
 	systemInstructions := `# IDENTITY and PURPOSE
-		You are an expert NPC generator for games like D&D 5th edition. 
-		You have freedom to be creative to get the best possible output.
+	You are an expert NPC generator for games like D&D 5th edition. 
+	You have freedom to be creative to get the best possible output.
 	`
 
 	generationInstructions := `Your job is to generate a description of a room in a fantasy setting using the name given by the user.
-	The output must be in markdown format, with the name of the room as the title and then the description of the room:
-	<Expected Output>
-	# Name of the room
-
-	Description of the room
-	</Expected Output>
-
+	The output is the description of the room.
+	Speak only in English, avoid Chinese ideogram.
 	Ensure the description is fantasy-themed.
 	`
 
@@ -63,7 +58,7 @@ func main() {
 		Model:    model,
 		Messages: messages,
 		Options: map[string]interface{}{
-			"temperature":    1.8,
+			"temperature":    0.0,
 			"repeat_last_n":  2,
 			"repeat_penalty": 2.2,
 			"top_k":          10,

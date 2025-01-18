@@ -1,13 +1,16 @@
 package game
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/rand"
-	"rpg-game/config"
-	"rpg-game/models"
+	"rpg/config"
+	"rpg/models"
+	"rpg/services"
+	"rpg/tools"
 
-	"rpg-game/ui"
-	"rpg-game/ui/colors"
+	"rpg/ui"
+	"rpg/ui/colors"
 )
 
 type Game struct {
@@ -42,14 +45,24 @@ func NewGame(playerRace models.Race) *Game {
 }
 
 func (g *Game) generateRoom() models.Room {
+	/* === ROOM DESCRIPTIOM === */
+	// BEGIN
+	roomName, _ := services.GetRandomRoomName()
+	description, _ := services.GetRoomDescription(roomName)
+
+	// Générer une pièce avec une description aléatoire
 	room := models.Room{
-		// TODO:
-		/*
-			🖐️🤖 HERE, GENERATE ROOM DESCRIPTIOM
-		*/
-		Description: config.RoomDescriptions[rand.Intn(len(config.RoomDescriptions))],
+		Description: description,
 		IsVisited:   false,
 	}
+	// END
+
+	/* before
+	room := models.Room{
+		Description: "You are in a dark room.",
+		IsVisited:   false,
+	}
+	*/
 
 	// Vérifier si tous les PNJ ont été placés
 	allNPCsPlaced := len(g.PlacedNPCs) >= 3
@@ -68,8 +81,8 @@ func (g *Game) generateRoom() models.Room {
 			// Choisir aléatoirement parmi les types disponibles
 			selectedType := availableTypes[rand.Intn(len(availableTypes))]
 			room.NPC = &models.NPC{
-				Type:     selectedType,
-				Messages: g.getNPCMessages(selectedType),
+				Type: selectedType,
+				//Messages: g.getNPCMessages(selectedType),
 			}
 			g.PlacedNPCs[selectedType] = true
 		}
@@ -94,16 +107,27 @@ func (g *Game) generateRoom() models.Room {
 		}
 	}
 
+	/* === MONSTER DESCRIPTIOM === */
+
 	// Génération des monstres (25% de chances)
 	if rand.Float32() < 0.25 && room.NPC == nil {
+		// choisir le type de monstre aléatoirement
 		monster := config.MonsterTypes[rand.Intn(len(config.MonsterTypes))]
 		monster.CurrentHP = monster.HP
+
+		// monster.Description = "You are facing a monster" // Avant
+
+		/* === MONSTER DESCRIPTIOM === */
+		// Générer une description aléatoire
+		monster.Description, _ = services.GetMonsterDescription(monster.Name)
+
 		room.Monster = &monster
 	}
 
 	return room
 }
 
+/*
 func (g *Game) getNPCMessages(npcType models.NPCType) []string {
 	switch npcType {
 	case models.Merchant:
@@ -131,6 +155,7 @@ func (g *Game) getNPCMessages(npcType models.NPCType) []string {
 		return []string{"..."}
 	}
 }
+*/
 
 func (g *Game) GetAvailableDirections() []string {
 	// Toujours retourner toutes les directions possibles
@@ -160,7 +185,47 @@ func (g *Game) ProcessRoom() bool {
 	room := g.Rooms[g.CurrentPos]
 
 	// You found the exit 🎉
-	if g.CurrentPos.X == 10 && g.CurrentPos.Y == 10 {
+	if g.CurrentPos.X == config.ExitCell.X && g.CurrentPos.Y == config.ExitCell.Y {
+		ui.Println(colors.Orange, "You are almost out of the castle! 🏰")
+		ui.Println(colors.Orange, "But first, you must give the 🦁 Sphinx all three colors to escape...")
+
+		/* === END LEVEL BOSS === */
+
+		for {
+			input := tools.Input("Question (type 'quit' ou 'exit' to quit) : ")
+
+			if input == "quit" || input == "exit" {
+				fmt.Println("👋 Bye!")
+				break
+			}
+
+			sphinxAnswer, _ := services.SpeakWithSphinx(input)
+			//services.SpeakWithSphinx(input)
+			fmt.Println()
+
+			// Test the Sphinx answer
+			var toolCall services.ToolCall
+			err := json.Unmarshal([]byte(sphinxAnswer), &toolCall)
+			if err != nil {
+				// if error it's not a tool call
+			} else {
+				if toolCall.Function.Arguments.First == "yellow" && toolCall.Function.Arguments.Second == "black" && toolCall.Function.Arguments.Third == "green" {
+					fmt.Println()
+					fmt.Println("🎉: You escaped!")
+
+					g.Player.XP += 500
+					g.Player.Gold += 1000
+
+					break
+				} else {
+					fmt.Println()
+					fmt.Println("😡: You are still trapped!")
+				}
+			}
+
+		}
+
+		/* === END LEVEL BOSS === */
 
 		ui.Println(colors.Orange, "--------------------------------------------------------")
 		ui.Println(colors.Orange, "Congratulations! You have reached the castle exit!")
@@ -174,17 +239,17 @@ func (g *Game) ProcessRoom() bool {
 		for npcType := range g.PlacedNPCs {
 			ui.Println(colors.Orange, fmt.Sprintf("- %s", string(npcType)))
 		}
-		ui.Println(colors.Orange,"--------------------------------------------------------")
+		ui.Println(colors.Orange, "--------------------------------------------------------")
 
 		return true
 	}
 
-	ui.Println(colors.Pink,"--------------------------------------------------------")
+	ui.Println(colors.Pink, "--------------------------------------------------------")
 	ui.Println(colors.Pink, fmt.Sprintf("You are in the room (%d, %d)", g.CurrentPos.X, g.CurrentPos.Y))
-	ui.Println(colors.Orange,"--------------------------------------------------------")
+	ui.Println(colors.Orange, "--------------------------------------------------------")
 	ui.Println(colors.Orange, "Room description:")
 	ui.Println(colors.Orange, room.Description)
-	ui.Println(colors.Orange,"--------------------------------------------------------")
+	ui.Println(colors.Orange, "--------------------------------------------------------")
 
 	// Update the room state
 	if !room.IsVisited {
@@ -198,20 +263,46 @@ func (g *Game) ProcessRoom() bool {
 		ui.Println(colors.Blue, fmt.Sprintf("You meet a %s", room.NPC.Type))
 		input, _ := ui.Input(colors.Blue, "Do you want to chat? (y/n)")
 
+		// TODO:
+		/* === NPC CHAT === */
 		if input == "y" {
-			// TODO:
-			/*
-				🖐️🤖 HERE, CHAT WITH NPC
-				some information from the chat with NPC can  be used to gain XP 🤔
-			*/
-			ui.Println(colors.Blue,room.NPC.Messages[rand.Intn(len(room.NPC.Messages))])
+
+			for {
+				inputChat := tools.Input("Question (type 'quit' ou 'exit' to quit) : ")
+
+				if inputChat == "quit" || inputChat == "exit" {
+					fmt.Println("👋 Bye!")
+					input = "n"
+					break
+				}
+
+				switch room.NPC.Type {
+				case models.Merchant:
+					// parler avec l'humain
+					services.SpeakWithEthan(inputChat)
+				case models.Guard:
+					// parler avec le nain
+					services.SpeakWithGrym(inputChat)
+				case models.Sorcerer:
+					// parler avec l'elfe
+					services.SpeakWithElvira(inputChat)
+				default:
+					// ne rien faire
+					break
+				}
+				fmt.Println()
+				fmt.Println()
+
+			}
+
+			//ui.Println(colors.Blue, "👋 Hello World 🌍")
 			g.Player.XP += 5 // XP bonus to chat with NPC
 		}
-		ui.Println(colors.Blue,"--------------------------------------------------------")
+		ui.Println(colors.Blue, "--------------------------------------------------------")
 	}
 
 	if room.Item != nil {
-		ui.Println(colors.Orange,"--------------------------------------------------------")
+		ui.Println(colors.Orange, "--------------------------------------------------------")
 
 		ui.Println(colors.Orange, fmt.Sprintf("You find a %s", room.Item.Description))
 
@@ -223,7 +314,7 @@ func (g *Game) ProcessRoom() bool {
 			ui.Println(colors.Orange, fmt.Sprintf("You pick up %d gold coins", room.Item.Value))
 		}
 
-		ui.Println(colors.Orange,"--------------------------------------------------------")
+		ui.Println(colors.Orange, "--------------------------------------------------------")
 
 		g.Player.XP += 15 // XP bonus for finding an item
 		room.Item = nil
@@ -233,20 +324,21 @@ func (g *Game) ProcessRoom() bool {
 	if room.Monster != nil {
 
 		ui.Println(colors.Red, fmt.Sprintf("🙀 You meet a %s", room.Monster.Name))
+
+		/* === MONSTER DESCRIPTIOM === */
+		ui.Println(colors.Red, room.Monster.Description)
+
 		input, _ := ui.Input(colors.Red, "Do you want to (f)ight or (e)scape? 👀")
 
 		// Escape
 		if input == "e" {
 			g.CurrentPos = g.PreviousPos
-			ui.Println(colors.Red,"--------------------------------------------------------")
+			ui.Println(colors.Red, "--------------------------------------------------------")
 			return false
 		}
-		// TODO:
-		/*
-			🖐️🤖 HERE, USE TOOLS: use "words" to fight
-		*/
+
 		if !g.Combat(room.Monster) {
-			ui.Println(colors.Red,"--------------------------------------------------------")
+			ui.Println(colors.Red, "--------------------------------------------------------")
 			return true
 		}
 		room.Monster = nil
@@ -257,7 +349,7 @@ func (g *Game) ProcessRoom() bool {
 
 func (g *Game) Combat(monster *models.Monster) bool {
 
-	ui.Println(colors.Red,"--------------------------------------------------------")
+	ui.Println(colors.Red, "--------------------------------------------------------")
 	ui.Println(colors.Red, fmt.Sprintf("Combat against %s (HP: %d, Attack: %d)", monster.Name, monster.CurrentHP, monster.AttackPower))
 
 	for {
@@ -277,7 +369,7 @@ func (g *Game) Combat(monster *models.Monster) bool {
 			g.Player.Gold += goldReward
 
 			ui.Println(colors.Red, fmt.Sprintf("You win %d XP and %d gold coins!", xpGained, goldReward))
-			ui.Println(colors.Red,"--------------------------------------------------------")
+			ui.Println(colors.Red, "--------------------------------------------------------")
 
 			return true
 		}
@@ -291,11 +383,11 @@ func (g *Game) Combat(monster *models.Monster) bool {
 		ui.Println(colors.Red, fmt.Sprintf("Your health points: %d/%d", g.Player.HP, g.Player.MaxHP))
 
 		if g.Player.HP <= 0 {
-			ui.Println(colors.Red,"--------------------------------------------------------")
+			ui.Println(colors.Red, "--------------------------------------------------------")
 			return false
 		}
 
-		ui.Println(colors.Red,"Press Enter to continue the fight...")
+		ui.Println(colors.Red, "Press Enter to continue the fight...")
 		fmt.Scanln()
 	}
 }

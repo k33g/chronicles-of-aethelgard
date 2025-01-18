@@ -2,57 +2,43 @@ package screen
 
 import (
 	"fmt"
-	"rpg-game/models"
+	"rpg/config"
+	"rpg/models"
 	"strings"
 
-	"rpg-game/ui"
-	"rpg-game/ui/colors"
+	"rpg/ui"
+	"rpg/ui/colors"
 )
 
+
 func getMonsterSymbol(monster *models.Monster) string {
-	switch monster.Name {
-	case "Gobelin":
-		return "👺"
-	case "Troll":
-		return "👹"
-	case "Dragon":
-		return "🐲"
-	case "Wolf":
-		return "🐺"
-	case "Bear":
-		return "🐻"
-	default:
-		return "M"
-	}
+	return monster.Symbol
 }
-
-
 
 func getNPCSymbol(npc *models.NPC) string {
-	switch npc.Type {
-	case models.Merchant:
-		return "🤗"
-	case models.Guard:
-		return "🤠"
-	case models.Sorcerer:
-		return "🎃"
-	default:
-		return "n"
-	}
+	return config.NPCTypesSymbols[npc.Type]
 }
-
 
 
 func DisplayLegend() {
 
 	ui.Println(colors.Black, "--------------------------------------------------------")
 
-	ui.Println(colors.Black,"You: 🙂")
-	ui.Println(colors.Black,"NPC: 🤗 merchant 🤠 guard 🎃 sorcerer")
-	ui.Println(colors.Black,"Monsters: 👺 Gobelin 👹 Troll 🐲 Dragon 🐺 Wolf 🐻 Bear")
+	ui.Println(colors.Black, "You: 🙂")
+
+	ui.Print(colors.Black, "NPC: ")
+	for kind, symbol := range config.NPCTypesSymbols {
+		ui.Print(colors.Black, fmt.Sprintf("%s %s ", symbol, kind))
+	}
+	ui.Println(colors.Black, "")
+
+	ui.Print(colors.Black, "Monsters: ")
+	for _, monster := range config.MonsterTypes {
+		ui.Print(colors.Black, fmt.Sprintf("%s %s ", monster.Symbol, monster.Name))
+	}
+	ui.Println(colors.Black, "")
 
 	ui.Println(colors.Black, "--------------------------------------------------------")
-
 
 }
 
@@ -93,9 +79,11 @@ func DisplayMap(currentPos models.Position, rooms map[models.Position]models.Roo
 				if room.Monster != nil {
 					//sb.WriteString(getMonsterSymbol(room.Monster) + " ")
 					sb.WriteString(getMonsterSymbol(room.Monster))
+					//sb.WriteString(room.Monster.Symbol)
 				} else if room.NPC != nil {
 					//sb.WriteString(getNPCSymbol(room.NPC) + " ")
 					sb.WriteString(getNPCSymbol(room.NPC))
+					//sb.WriteString(room.NPC.Symbol)
 				} else if room.IsVisited {
 					//sb.WriteString("# ")
 					sb.WriteString("⬜️")
@@ -127,5 +115,3 @@ func DisplayStatus(player models.Player) {
 	ui.Println(colors.Purple, fmt.Sprintf("⭐️ Gold: %d coins", player.Gold))
 
 }
-
-

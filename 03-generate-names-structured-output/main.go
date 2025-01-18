@@ -26,8 +26,8 @@ func main() {
 	}
 
 	systemInstructions := `# IDENTITY and PURPOSE
-		You are an expert NPC generator for games like D&D 5th edition. 
-		You have freedom to be creative to get the best possible output.
+	You are an expert NPC generator for games like D&D 5th edition. 
+	You have freedom to be creative to get the best possible output.
 	`
 
 	// define schema for a structured output
@@ -60,8 +60,9 @@ func main() {
 			}
 		`
 	*/
+
 	generationInstructions := `Generate a random name for a role-playing game character for a given kind (species/race).
-	The output should be in JSON format, with the keys 'name' and 'kind'. Ensure the name is fantasy-themed.
+	The output should be in JSON format, with the keys 'name' and 'kind'. Ensure the name is fantasy-themed. 
 	`
 
 	userContent := "Give a name for a Dwarf."
@@ -96,7 +97,6 @@ func main() {
 	jsonResult := ""
 	respFunc := func(resp api.ChatResponse) error {
 		fmt.Print(resp.Message.Content)
-		//jsonResult += resp.Message.Content
 		jsonResult = resp.Message.Content
 		return nil
 	}
@@ -113,5 +113,4 @@ func main() {
 	}
 
 	fmt.Println("\n🟦")
-
 }

@@ -7,20 +7,6 @@ import (
 	"fmt"
 )
 
-type Function struct {
-	Name      string    `json:"name"`
-	Arguments Arguments `json:"arguments"`
-}
-
-type Arguments struct {
-	First  string `json:"first"`
-	Second string `json:"second"`
-	Third  string `json:"third"`
-}
-
-type ToolCall struct {
-	Function Function `json:"function"`
-}
 
 func main() {
 
@@ -37,7 +23,7 @@ func main() {
 		fmt.Println()
 
 		// Test the Sphinx answer
-		var toolCall ToolCall
+		var toolCall services.ToolCall
 		err := json.Unmarshal([]byte(sphinxAnswer), &toolCall)
 		if err != nil {
 			//fmt.Println("😡: Error unmarshalling Sphinx answer")

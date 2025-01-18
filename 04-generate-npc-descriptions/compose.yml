@@ -20,11 +20,8 @@ services:
     develop:
       watch:
         - action: rebuild
-          path: ./main.go
-        - action: rebuild
-          path: ./instructions.md
-        - action: rebuild
-          path: ./steps.md
-        - action: rebuild
-          path: ./character.json          
+          path: .
+          ignore:
+            - "**/character-sheet-*.md" 
+      
 

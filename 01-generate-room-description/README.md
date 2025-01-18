@@ -1,64 +1,61 @@
 # Générer des descriptions de salles
 
+## Que fais le code ?
 
-<!-- TODO: à re écrire -->
+```mermaid
+graph TD
+    A[Start] --> B[Set Context & Get Env Variables]
+    B --> C[Initialize Ollama Client]
+    
+    subgraph prompt[Prompt Construction]
+        D1[Define System Instructions<br/>You are a Generator] 
+        D2[Define Generation Instructions<br/>Room Description Rules]
+        D3[Set User Content<br/>QUESTION]
+        D1 & D2 & D3 --> E[Create Messages Array]
+    end
+    
+    subgraph config[Chat Configuration]
+        F1[Set Stream Mode: true]
+        F2[Set Parameters:<br/>temperature: 1.8<br/>repeat_penalty: 2.2<br/>etc...]
+        F1 & F2 --> G[Create Chat Request]
+    end
+    
+    C --> prompt
+    prompt --> config
+    G --> H[Start Chat Completion]
+    H --> I[Stream Response to Console]
+    I --> J[End Program]
+    
+    style A fill:#f9f,stroke:#333
+    style J fill:#f9f,stroke:#333
+    style prompt fill:#eef,stroke:#333
+    style config fill:#efe,stroke:#333
+```
+
+## Allons voir le code
+
+[Le code](main.go)
+
+## Que font le 🐳 compose file & le Dockerfile ?
+
+- [Le 🐳 compose file](compose.yml) ... C'est quoi ce `watch` ?
+- [Dockerfile](Dockerfile)
+
+## Lancer l'application
 
 ```bash
 docker compose up --watch
 ```
+> Et attendez un peu ⏳
 
+## 🚧 Travaillez un peu
 
+- Essayez avec d'autre noms de pièces : `userContent`
+- Vous pouvez modifier les instructions : `systemInstructions` & `generationInstructions`
+- Jouer aussi avec les settings (en fait uniquement la `temperature`) ... 🤔 mais pourquoi ?
 
-Il y a plusieurs façons de lancer le programme.
+## Questions ?
 
-## Si Ollama et Go sont installés en local
+## Quittez Docker Compose
 
-dans le fichier `.env`, vous devez avoir:
-
-```bash
-OLLAMA_HOST=http://localhost:11434
-LLM=qwen2.5:0.5b
-```
-
-Et vous lancez le programme avec:
-```bash
-go run main.go
-```
-
-## Si Ollama et Go sont installés dans des containers
-
-dans le fichier `.env`, vous devez avoir:
-
-```bash
-OLLAMA_HOST=http://ollama-service:11434
-LLM=qwen2.5:0.5b
-```
-
-Et vous lancez le programme avec:
-```bash
-docker compose up
-```
-
-Vous pouvez voir les résultats avec:
-```bash
-docker compose logs generate-description
-```
-
-## Si Ollama est installé en local et Go dans un container
-
-Il est possible de "contacter" Ollama avec les paramètres suivants:
-
-```bash
-OLLAMA_HOST=http://host.docker.internal:11434
-LLM=qwen2.5:0.5b
-```
-
-## Autre option : Devcontainer
-
-<🚧 work in progress>
-
-
-## Prompting
-
-- Essayer d'autres prompts
-- Jouer aussi avec les settings (temperature)
+[README](../README.md)

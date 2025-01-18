@@ -1,91 +1,33 @@
 # Chronicles of Aethelgard
 
-à la fois un moyen de jouer avec Ollama (sans GPU) et d'utiliser Docker Compose.
+## Objectifs de ce workshop:
 
-faire essentiellement travailler les gens sur les prompts 
+- Comprendre ce qu'est une application d'IA générative en utilisant Ollama et des petits LLM
+- On utilisera directement l'API d'Ollama (qui est écrit en Go)
+  - Donc tous les exemples sont en Go
+  - Pas de panique, vous allez essentiellement jouer avec les informations à envoyer au(x) LLM(s)
+  - Donc pas de code, ou presque (on va le lire et éventuellement le modifier)
+- ATTENTION: on va bosser sans GPU (si c'est possible)
+  - Donc avec de trés petits LLMs
+  - Pas forcément très précis, mais ils sont très pratiques pour travailler sur des petites architectures et on peut tout de même les éduquer un peu
+- Pourquoi Docker ? Limiter les galères d'installation
 
-à la fin il faudra tout mettre dans un même compose file
+## En vrai que va-t-on faire ?
 
-<!-- Construire le compose file au fur et a mesure
-on evite la partie data externe et le network partagé 
+À l'aide de quelques exercices (j'en ai 17 🤪) nous allons progressivement voir comment fonctionne une application d'IA générative. Tous les principes que je vais vous montrer fonctionnent avec d'autres langages (Ollama propose un SDK JavaScript et un SDK Python et aussi une API REST). Si plus tard vous souhaitez vous mettre à LangChain(Python, JS, 4J), les principes restes identiques.
 
--->
+Le contexte: Et si on se faisait aider par l'IA pour créer un JdR en mode texte?
 
-## Remarques
+Nous verrons comment:
 
-Expliquer pourquoi je ne fais pas de go build / ou dire que normalement je devrair le faire
+0. Si vous avez respecté les prérequis 😈: [`00-requirements`](00-requirements/README.md)
+1. Générer la description d'une pièce dans un donjon: [`01-generate-room-description`](01-generate-room-description/README.md)
+2. Générer des noms de personnages (en JSON): [`02-generate-names`](02-generate-names/README.md)
+3. Pareil mais en mieux: [`03-generate-names-structured-output`](03-generate-names-structured-output/README.md)
+4. Génerer une fiche de personnage: [`04-generate-npc-descriptions`](04-generate-npc-descriptions/README.md)
+🚧
 
-## Pré-requis
-
-### Docker
-
-### Ollama
-> https://hub.docker.com/r/ollama/ollama
-
-```bash
-docker pull ollama/ollama:0.5.4
-```
-
-LLMs:
-
-- qwen2.5:0.5a
-- qwen2.5:1.5b
-- qwen2.5:3b
-- qwen2:1.5b-instruct
-
-ou un compose file à lancer à l'avance
-
-### Golang
-
-```bash
-docker pull golang:1.23.1-alpine
-```
-
-localement et l'image
-
-docker pull python:3.13-alpine
-
-- Installer Go (une version récente - `j'utilise go1.23.1`) 
-- Ollama (version `0.5.4`)
-- Installer Docker
+Et à la fin nous essaieront de regrouper tout ça dans un mini "Dungeon Crawler"
 
 
 
-https://hub.docker.com/r/ollama/ollama
-
-
-## Initialisation
-
-```bash
-docker volume create ollama_shared_data
-```
-
-
-there is a map for a role playing game : 10 * 10 cells. Randomly place three  orcs, two dragons
-... and five treasures on the map
-
-Entre le moment oú j'ai posté sur le CFP et maintenant, il s'est passé beaucoup de choses (évolution d'Ollama et des modèles + mes connaissances). 
-
-Le jeu va être très simple. L'objectif étant de vous faire comprendre les fonctionnements de l'IA générative et de vous donner des idées pour vos propres projets.
-
-## Pourquoi Go ?
-
-Pour utiliser directement l'API d'Ollama.
-La logique utilisée est la même que pour les autres langages.
-
-## Bébés LLMs
-
-Pas forcément très précis, mais ils sont très pratiques pour travailler sur des petites architectures et on peut tout de même les éduquer un peu.
-
-
-## Principes et objectifs du workshop
-
-- Comprendre comment fonctionne les applications d'IA générative
-- Travailler sur les prompts
-- On ne codera quasiment pas
-- On va créer tous les éléments / outils pour aider à jouer à un jeu de rôle
-
-
-#### 12-call-room-services
-
-commencer l'assemblage avec compose

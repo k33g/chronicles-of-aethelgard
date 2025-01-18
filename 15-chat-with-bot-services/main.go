@@ -16,7 +16,8 @@ func main() {
 			break
 		}
 
-		services.SpeakWithElvira(input)
+		//services.SpeakWithElvira(input)
+		services.SpeakWithEthan(input)
 	}
 
 }
