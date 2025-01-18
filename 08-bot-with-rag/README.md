@@ -110,19 +110,22 @@ graph TD
 docker compose up --watch
 ```
 
+
 ## 🚧 Travaillez un peu
 
-On va juste se contenter d'exécuter les codes
+- On va juste se contenter d'exécuter les codes
+- Jetez un coup d'oeil à [`store-grym.json`](store-grym.json)
+
 
 
 ## Testez les services (au moins un des services)
 
 ### Avec curl
 
-- `query-1.sh`
-- `query-2.sh`
-- `query-3.sh`
-- `query-4.sh`
+- `query-1.sh`, ensuite, essayez `docker compose logs bot-with-memory`
+- `query-2.sh`, ensuite, essayez `docker compose logs bot-with-memory`
+- `query-3.sh`, ensuite, essayez `docker compose logs bot-with-memory`
+- `query-4.sh`, ensuite, essayez `docker compose logs bot-with-memory`
 
 > Bien sûr, adaptez les requête (numéro de port HTTP par exemple)
 
