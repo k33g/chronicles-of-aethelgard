@@ -26,7 +26,9 @@ Nous verrons comment:
 3. Pareil mais en mieux: [`03-generate-names-structured-output`](03-generate-names-structured-output/README.md)
 4. Génerer une fiche de personnage: [`04-generate-npc-descriptions`](04-generate-npc-descriptions/README.md)
 5. Créer un micro-service pour obtenir une description de pièce dans un donjon: [`05-room-services`](05-room-services/README.md)
-
+6. Créer un service pour envoyer une question à un PNJ: [`06-bot-npc`](06-bot-npc/README.md)
+7. Créer un service pour envoyer une question à un PNJ avec gestion de la mémoire conversationnelle: [`07-bot-with-memory`](07-bot-with-memory/README.md)
+8. Créer un service pour envoyer une question à un PNJ + **RAG**: [`08-bot-with-rag`](08-bot-with-rag/README.md)
 
 
 🚧
