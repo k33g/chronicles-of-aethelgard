@@ -14,5 +14,3 @@
    - Rechercher des images ressemblantes 
    - Recommander des produits proches
 
-___
-[◀️ Previous](./00-README.md#rag-retrieval-augmented-generation) | [🤔 RAG⁉️ ▶️](./02-rag.drawio)

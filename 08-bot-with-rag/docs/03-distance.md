@@ -15,8 +15,7 @@
 ```bash
 go test 
 ```
-___
-[◀️ Previous](./02-rag.drawio) | [👀 montre moi du code ▶️](./chunking_test.go#L32)
+
 
 
 
