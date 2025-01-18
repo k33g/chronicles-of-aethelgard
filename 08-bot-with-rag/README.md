@@ -20,14 +20,84 @@ Nous avons donc 2 programmes:
 
 ## `chunking_test.go` pour générer les chunks
 
-[Le code](chunking_test.go)
+```mermaid
+graph TD
+    A[Start Test] --> B[Initialize Environment]
+    B --> C[Create Ollama Client]
+    C --> D[Load Character Info]
+    D --> E[Read Character Sheet]
+    
+    subgraph embedding[Embedding Generation]
+        E --> F[Split Content into Chunks]
+        F --> G[Initialize Vector Store]
+        G --> H[Process Each Chunk]
+        H --> |For each chunk| I[Generate Embedding]
+        I --> J[Create Vector Record]
+        J --> K[Add to Vector Store]
+        K --> |Next Chunk| H
+    end
+    
+    subgraph storage[Store Persistence]
+        K --> L[Convert Store to JSON]
+        L --> M[Generate Store Filename]
+        M --> N[Write JSON to File]
+    end
+    
+    N --> O[End Test]
+    
+    style A fill:#f9f
+    style O fill:#f9f
+    style embedding fill:#ddf
+    style storage fill:#dfd
+```
 
+**[Le code](chunking_test.go)**
 
 ## `main.go` pour la complétion avec recherche de similarité
 
-[Le code](main.go)
+```mermaid
+graph TD
+    A[Start] --> B[Initialize Environment]
+    B --> C[Create Ollama Client]
+    C --> D[Load Character]
+    D --> E[Load Vector Store from JSON]
+    
+    subgraph server[HTTP Server]
+        E --> F[Initialize Memory Array]
+        F --> G[Setup POST /api/chat Endpoint]
+    end
+    
+    subgraph request[Request Processing]
+        G --> H[Receive Question]
+        H --> I[Generate Question Embedding]
+        
+        subgraph similarity[Similarity Search]
+            I --> J[Calculate Cosine Similarities]
+            J --> K[Sort Similarities]
+            K --> L[Select Top 5 Similar Chunks]
+            L --> M[Create New Context]
+        end
+        
+        subgraph chat[Chat Generation]
+            M --> N[Build Messages Array]
+            N --> O[Add System Instructions]
+            O --> P[Add Memory]
+            P --> Q[Add Current Question]
+            Q --> R[Configure LLM]
+            R --> S[Stream Response]
+        end
+        
+        S --> T[Save to Memory]
+        T --> U[Ready for Next Request]
+    end
+    
+    style A fill:#f9f
+    style server fill:#dfd
+    style similarity fill:#fdf
+    style chat fill:#ddf
+```
 
-
+**[Le code](main.go)**
 
 ## Que font le 🐳 compose file & le Dockerfile ?
 
