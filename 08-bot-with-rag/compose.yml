@@ -25,10 +25,8 @@ services:
     command: go run main.go; sleep infinity
     environment:
       - OLLAMA_HOST=http://ollama-service:11434
-      #- LLM=qwen2.5:1.5b
       - LLM=qwen2.5:0.5b
       - EMBEDDINGS_LLM=snowflake-arctic-embed:33m
-      #- HTTP_PORT=5052
       - CHARACTER_NAME=Grym
       - CHARACTER_KIND=dwarf
     ports:

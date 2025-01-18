@@ -51,7 +51,6 @@ func main() {
 
 	ollamaUrl := os.Getenv("OLLAMA_HOST")
 	model := os.Getenv("LLM")
-	// TODO: test if variables are empty
 
 	fmt.Println("🌍", ollamaUrl, "📕", model)
 

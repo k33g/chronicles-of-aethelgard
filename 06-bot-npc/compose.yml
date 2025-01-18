@@ -5,13 +5,12 @@ services:
     ports:
       - 11434:11434
 
-  bot-npc:
+  bot-elvira:
     build: .
     command: go run main.go; sleep infinity
     environment:
       - OLLAMA_HOST=http://ollama-service:11434
       - LLM=qwen2.5:0.5b
-      #- LLM=qwen2.5:1.5b
       - CHARACTER_NAME=Elvira
       - CHARACTER_KIND=Elf
     depends_on:
@@ -26,18 +25,3 @@ services:
         - action: rebuild
           path: ./main.go
 
-  bot-grym:
-    build: .
-    command: go run main.go; sleep infinity
-    environment:
-      - OLLAMA_HOST=http://ollama-service:11434
-      - LLM=qwen2.5:0.5b
-      - CHARACTER_NAME=Grym
-      - CHARACTER_KIND=Dwarf
-    depends_on:
-      ollama-service:
-        condition: service_started
-    ports:
-      - 5052:8080
-    volumes:
-      - ./:/app

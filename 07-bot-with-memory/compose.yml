@@ -11,8 +11,6 @@ services:
     environment:
       - OLLAMA_HOST=http://ollama-service:11434
       - LLM=qwen2.5:0.5b
-      #- LLM=qwen2.5:1.5b
-      #- HTTP_PORT=5052
       - CHARACTER_NAME=Elvira
       - CHARACTER_KIND=Elf
     depends_on:
