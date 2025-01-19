@@ -27,8 +27,6 @@ type Item struct {
 	Value       int    // Pour l'or : valeur en pièces
 }
 
-/* === MONSTER DESCRIPTIOM === */
-
 type Monster struct {
 	Name        string
 	Description string

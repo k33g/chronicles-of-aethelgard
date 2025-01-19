@@ -1,13 +1,10 @@
 package game
 
 import (
-	"encoding/json"
 	"fmt"
 	"math/rand"
 	"rpg/config"
 	"rpg/models"
-	"rpg/services"
-	"rpg/tools"
 
 	"rpg/ui"
 	"rpg/ui/colors"
@@ -47,22 +44,11 @@ func NewGame(playerRace models.Race) *Game {
 func (g *Game) generateRoom() models.Room {
 	/* === ROOM DESCRIPTIOM === */
 	// BEGIN
-	roomName, _ := services.GetRandomRoomName()
-	description, _ := services.GetRoomDescription(roomName)
-
-	// Générer une pièce avec une description aléatoire
-	room := models.Room{
-		Description: description,
-		IsVisited:   false,
-	}
-	// END
-
-	/* before
 	room := models.Room{
 		Description: "You are in a dark room.",
 		IsVisited:   false,
 	}
-	*/
+	// END
 
 	// Vérifier si tous les PNJ ont été placés
 	allNPCsPlaced := len(g.PlacedNPCs) >= 3
@@ -107,19 +93,16 @@ func (g *Game) generateRoom() models.Room {
 		}
 	}
 
-	/* === MONSTER DESCRIPTIOM === */
-
 	// Génération des monstres (25% de chances)
 	if rand.Float32() < 0.25 && room.NPC == nil {
 		// choisir le type de monstre aléatoirement
 		monster := config.MonsterTypes[rand.Intn(len(config.MonsterTypes))]
 		monster.CurrentHP = monster.HP
 
-		// monster.Description = "You are facing a monster" // Avant
-
 		/* === MONSTER DESCRIPTIOM === */
-		// Générer une description aléatoire
-		monster.Description, _ = services.GetMonsterDescription(monster.Name)
+		// BEGIN
+		monster.Description = "You are facing a monster"
+		// END
 
 		room.Monster = &monster
 	}
@@ -191,41 +174,9 @@ func (g *Game) ProcessRoom() bool {
 
 		/* === END LEVEL BOSS === */
 
-		for {
-			input := tools.Input("Question (type 'quit' ou 'exit' to quit) : ")
-
-			if input == "quit" || input == "exit" {
-				fmt.Println("👋 Bye!")
-				break
-			}
-
-			sphinxAnswer, _ := services.SpeakWithSphinx(input)
-			//services.SpeakWithSphinx(input)
-			fmt.Println()
-
-			// Test the Sphinx answer
-			var toolCall services.ToolCall
-			err := json.Unmarshal([]byte(sphinxAnswer), &toolCall)
-			if err != nil {
-				// if error it's not a tool call
-			} else {
-				if toolCall.Function.Arguments.First == "yellow" && toolCall.Function.Arguments.Second == "black" && toolCall.Function.Arguments.Third == "green" {
-					fmt.Println()
-					fmt.Println("🎉: You escaped!")
-
-					g.Player.XP += 500
-					g.Player.Gold += 1000
-
-					break
-				} else {
-					fmt.Println()
-					fmt.Println("😡: You are still trapped!")
-				}
-			}
-
-		}
-
-		/* === END LEVEL BOSS === */
+		// BEGIN
+		ui.Println(colors.Orange, "🦁 Sphinx: Welcome to the final challenge, brave adventurer!")
+		// END
 
 		ui.Println(colors.Orange, "--------------------------------------------------------")
 		ui.Println(colors.Orange, "Congratulations! You have reached the castle exit!")
@@ -263,39 +214,12 @@ func (g *Game) ProcessRoom() bool {
 		ui.Println(colors.Blue, fmt.Sprintf("You meet a %s", room.NPC.Type))
 		input, _ := ui.Input(colors.Blue, "Do you want to chat? (y/n)")
 
-		// TODO:
-		/* === NPC CHAT === */
 		if input == "y" {
+			/* === NPC CHAT === */
+			// BEGIN
+			ui.Println(colors.Blue, "👋 Hello World 🌍\n\n")
+			// END
 
-			for {
-				inputChat := tools.Input("Question (type 'quit' ou 'exit' to quit) : ")
-
-				if inputChat == "quit" || inputChat == "exit" {
-					fmt.Println("👋 Bye!")
-					input = "n"
-					break
-				}
-
-				switch room.NPC.Type {
-				case models.Merchant:
-					// parler avec l'humain
-					services.SpeakWithEthan(inputChat)
-				case models.Guard:
-					// parler avec le nain
-					services.SpeakWithGrym(inputChat)
-				case models.Sorcerer:
-					// parler avec l'elfe
-					services.SpeakWithElvira(inputChat)
-				default:
-					// ne rien faire
-					break
-				}
-				fmt.Println()
-				fmt.Println()
-
-			}
-
-			//ui.Println(colors.Blue, "👋 Hello World 🌍")
 			g.Player.XP += 5 // XP bonus to chat with NPC
 		}
 		ui.Println(colors.Blue, "--------------------------------------------------------")
@@ -325,7 +249,6 @@ func (g *Game) ProcessRoom() bool {
 
 		ui.Println(colors.Red, fmt.Sprintf("🙀 You meet a %s", room.Monster.Name))
 
-		/* === MONSTER DESCRIPTIOM === */
 		ui.Println(colors.Red, room.Monster.Description)
 
 		input, _ := ui.Input(colors.Red, "Do you want to (f)ight or (e)scape? 👀")

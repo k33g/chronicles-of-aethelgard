@@ -14,8 +14,6 @@ var ExitCell = models.Position{
 	Y: 10,
 }
 
-
-/* === MONSTER DESCRIPTIOM === */
 var MonsterTypes = []models.Monster{
 	{Name: "Skeleton", HP: 20, AttackPower: 5, Symbol: "💀"},
 	{Name: "Troll", HP: 40, AttackPower: 8, Symbol: "👹"},
@@ -24,13 +22,6 @@ var MonsterTypes = []models.Monster{
 	{Name: "Gobelin", HP: 50, AttackPower: 10, Symbol: "👺"},
 }
 
-/*
-var NPCTypes = []models.NPC{
-	{Type: models.Merchant, Symbol: "🤩"},
-	{Type: models.Guard, Symbol: "🤠"},
-	{Type: models.Sorcerer, Symbol: "😈"},
-}
-*/
 
 var NPCTypesSymbols = map[models.NPCType]string{
 	models.Merchant: "🤩",
