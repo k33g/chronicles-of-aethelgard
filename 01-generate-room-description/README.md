@@ -46,13 +46,13 @@ graph TD
 ```bash
 docker compose up --watch
 ```
-> Et attendez un peu ⏳
+> Et attendez un peu ⏳ ... qur tous les services soient démarrés.
 
 ## 🚧 Travaillez un peu
 
 - Essayez avec d'autre noms de pièces : `userContent`
 - Vous pouvez modifier les instructions : `systemInstructions` & `generationInstructions`
-- Jouer aussi avec les settings (en fait uniquement la `temperature`) ... 🤔 mais pourquoi ?
+- Jouer aussi avec les settings (en fait uniquement la `temperature`) ... 🤔 mais pourquoi ? *(Explications à donner)*
 
 ## Questions ?
 

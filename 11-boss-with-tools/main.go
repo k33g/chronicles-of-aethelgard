@@ -33,7 +33,6 @@ func main() {
 
 	ollamaUrl := os.Getenv("OLLAMA_HOST")
 	model := os.Getenv("LLM")
-	// TODO: test if variables are empty
 
 	fmt.Println("🌍", ollamaUrl, "📕", model)
 
@@ -64,12 +63,8 @@ func main() {
 						"type":        "string",
 						"description": "The second magic word",
 					},
-					"third": map[string]any{
-						"type":        "string",
-						"description": "The third magic word",
-					},
 				},
-				"required": []string{"first", "second", "third"},
+				"required": []string{"first", "second"},
 			},
 		},
 	}
@@ -78,8 +73,6 @@ func main() {
 	jsonTools, _ := json.MarshalIndent(tools, "", "  ")
 
 	fmt.Println("🛠️", string(jsonTools))
-	//fmt.Println(string(jsonTools))
-
 
 	// Transform the tools to Ollama format
 	var toolsList api.Tools
@@ -129,27 +122,22 @@ func main() {
 				"temperature":   0.0,
 				"repeat_last_n": 2,
 			},
-			Tools:  toolsList,
+			Tools:  toolsList, // ✋✋✋
 			Stream: &noStream,
 		}
 		err = client.Chat(ctx, req, func(resp api.ChatResponse) error {
-			//fmt.Println("🖐️", resp.Message.ToolCalls)
-			/*
-				for _, toolCall := range resp.Message.ToolCalls {
-					fmt.Println(toolCall.Function.Name, toolCall.Function.Arguments)
-				}
-			*/
+
 			// if no tools exit
 			if len(resp.Message.ToolCalls) == 0 {
 				return nil
 			}
-			escape = true
+			escape = true // I want to escape
 
-			toolCall := resp.Message.ToolCalls[0]
-			fmt.Println(toolCall.Function.Name, toolCall.Function.Arguments)
+			toolCall := resp.Message.ToolCalls[0] // Use only the first call
+
+			fmt.Println("🚀", toolCall.Function.Name, toolCall.Function.Arguments)
 
 			jsonToolCall, _ := json.MarshalIndent(toolCall, "", "  ")
-			//response.Write([]byte("\n🛠️ :\n" + string(jsonToolCall)))
 			response.Write(jsonToolCall)
 
 			flusher.Flush()
@@ -158,7 +146,7 @@ func main() {
 			return nil
 		})
 
-		if escape == false {
+		if escape == false { // regular chat completion
 			// Prompt construction
 			messages = []api.Message{
 				{Role: "system", Content: systemInstructions},
@@ -202,12 +190,6 @@ func main() {
 				log.Fatal("😡:", err)
 			}
 		}
-
-		/*
-			if err != nil {
-				log.Fatalln("😡", err)
-			}
-		*/
 
 	})
 

@@ -33,7 +33,6 @@ func main() {
 
 	ollamaUrl := os.Getenv("OLLAMA_HOST")
 	model := os.Getenv("LLM")
-	// TODO: test if variables are empty
 
 	fmt.Println("🌍", ollamaUrl, "📕", model)
 
@@ -112,9 +111,6 @@ func main() {
 		}
 
 		err = client.Chat(ctx, req, respFunc)
-
-		// first try to add a specific question to exit the place/game
-		// detect if the user want to trigger an action (from the user question only)
 
 		if err != nil {
 			log.Fatal("😡:", err)

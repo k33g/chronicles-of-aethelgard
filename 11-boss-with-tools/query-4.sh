@@ -2,7 +2,7 @@
 SERVICE_URL="http://localhost:6666"
 read -r -d '' DATA <<- EOM
 {
-  "question":"I want to escape with this magic words: pink and purple"
+  "question":"I want to escape with this magic words: yellow black and green"
 }
 EOM
 

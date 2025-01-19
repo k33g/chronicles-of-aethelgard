@@ -17,8 +17,6 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
-    #ports:
-    #  - 5050:8080 # we don't need to expose the port, explain why
     volumes:
       - ../05-room-services/:/app
 
@@ -50,8 +48,6 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
-    #ports:
-    #  - 5052:8080
     volumes:
       - ../07-bot-with-memory:/app
 
@@ -68,8 +64,6 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
-    #ports:
-    #  - 5052:8080
     volumes:
       - ../07-bot-with-memory:/app
 

@@ -7,7 +7,6 @@ import (
 	"fmt"
 )
 
-
 func main() {
 
 	for {
@@ -20,6 +19,7 @@ func main() {
 
 		sphinxAnswer, _ := services.SpeakWithSphinx(input)
 		//services.SpeakWithSphinx(input)
+		fmt.Println()
 		fmt.Println()
 
 		// Test the Sphinx answer

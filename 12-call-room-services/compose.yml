@@ -20,15 +20,9 @@ services:
     depends_on:
       ollama-service:
         condition: service_started
-    #ports:
-    #  - 5050:8080 # we don't need to expose the port, explain why
     volumes:
       - ../05-room-services/:/app
-    #develop:
-    #  watch:
-    #    - action: rebuild
-    #      path: ./main.go
-  
+
   main:
     build: .
     command: go run main.go; sleep infinity

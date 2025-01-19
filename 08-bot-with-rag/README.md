@@ -117,7 +117,6 @@ docker compose up --watch
 - Jetez un coup d'oeil à [`store-grym.json`](store-grym.json)
 
 
-
 ## Testez les services (au moins un des services)
 
 ### Avec curl

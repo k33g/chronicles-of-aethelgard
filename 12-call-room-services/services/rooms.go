@@ -35,9 +35,6 @@ func GetRandomRoomName() (string, error) {
 		fmt.Printf("😡 Error reading response: %v\n", err)
 		return "", err
 	}
-	// Print the response
-	//fmt.Printf("Status Code: %d\n", resp.StatusCode)
-	//fmt.Printf("Response Body: %s\n", string(body))
 
 	return string(body), nil
 }

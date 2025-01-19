@@ -3,6 +3,7 @@
 ## Objectif
 
 Faire un service qui permet d'obtenir une description de pièce à partir d'un nom.
+> Et par exemple, l'utiliser dans un autre programme pour obtenir une description de la pièce dans laquelle on entre.
 
 ## Que fait ce programme ?
 

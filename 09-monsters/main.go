@@ -46,12 +46,10 @@ func main() {
 		You have freedom to be creative to get the best possible output.
 	`
 
-	generationInstructions := `Your job is to generate a short (1 or 2 sentences) description of a monster in a fantasy setting using the name given by the user.
-	Ensure the description is fantasy-themed.
+	generationInstructions := `👋 c'est par ici !
 	`
 
 	mux := http.NewServeMux()
-
 
 	mux.HandleFunc("POST /api/monster/generate/description", func(response http.ResponseWriter, request *http.Request) {
 
@@ -111,24 +109,6 @@ func main() {
 
 			return nil
 		}
-
-		// TODO: add an option to stop the completion
-
-		/*
-			_, err = completion.ChatStream(ollamaUrl, query,
-				func(answer llm.Answer) error {
-					log.Println("📝:", answer.Message.Content)
-					response.Write([]byte(answer.Message.Content))
-
-					flusher.Flush()
-					if !shouldIStopTheCompletion {
-						return nil
-					} else {
-						return errors.New("🚫 Cancelling request")
-					}
-				})
-
-		*/
 
 		err = client.Chat(ctx, req, respFunc)
 
